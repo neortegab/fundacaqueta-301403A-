@@ -13,7 +13,7 @@ import java.time.Period;
  *
  * @author nebel
  */
-public abstract class Contrato {
+public abstract class Contrato implements Comparable<Contrato>{
 
     // ------------------ Variables ------------------
     private String objetivo, tipo, duracion;
@@ -167,5 +167,15 @@ public abstract class Contrato {
 
             duracion = duracionCalculada;
         }
+    }
+    
+    
+    public int compareTo(Contrato contrato){
+        if(this.fechaInicio.isBefore(contrato.obtenerFechaInicio()))
+            return 1;
+        else if(this.fechaInicio.isEqual(contrato.obtenerFechaInicio()))
+            return 0;
+        else
+            return -1;
     }
 }

@@ -35,6 +35,11 @@ public class Profesional extends Usuario{
      * Actividades que desempeña el profesional en un proyecto.
      */
     private ArrayList<Actividad> actividades;
+    
+    /**
+     * Contrato que posee el profesional en el proyecto.
+     */
+    private ContratoLaboral contrato;
 
     // ------------ Constructor -------------------
     public Profesional(String nombreUsuario, String contraseña, String nombre, String correo, int documento, LocalDate fechaNacimiento, String perfil, String cargo) {
@@ -118,4 +123,23 @@ public class Profesional extends Usuario{
     public void modificarActividades(ArrayList<Actividad> actividades) {
         this.actividades = actividades;
     }
+    
+    /**
+     * Obtiene el contrato laboral del profesional
+     * @return contrato
+     */
+    public ContratoLaboral obtenerContrato() {
+        return contrato;
+    }
+
+    /**
+     * Modifica el contrato laboral del profesional
+     * pre - solo un administrador puede modificar los contratos
+     * @param contrato - nuevo contrato a reemplazar el anterior
+     */
+    public void modificarContrato(ContratoLaboral contrato) {
+        this.contrato = contrato;
+    }
+    
+    
 }
