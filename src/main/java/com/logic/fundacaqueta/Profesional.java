@@ -114,7 +114,14 @@ public class Profesional extends Usuario{
     public ArrayList<Actividad> obtenerActividades() {
         return actividades;
     }
-
+    
+    /**
+     * Metodo que agrega una actividad a la lista de actividades del profesional
+     * @param actividad - actividad nueva a agregar
+     */
+    public void agregarActividad(Actividad actividad){
+        actividades.add(actividad);
+    }
     /**
      * Modifica la lista de actividades del profesional con una nueva lista
      *

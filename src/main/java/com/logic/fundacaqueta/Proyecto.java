@@ -168,7 +168,24 @@ public class Proyecto {
     public ArrayList<ContratoColaboracion> obtenerContratos() {
         return contratos;
     }
+    
+    /**
+     * Metodo que agrega un nuevo contrato a la lista de contratos y ordena la lista segun su fecha de inicio
+     * El contrato con la fecha de inicio mas antigua debe siempre permanecer en el tope
+     * @param nuevoContrato - nuevo contrato a añadir
+     */
+    public void agregarContrato(ContratoColaboracion nuevoContrato){
+        contratos.add(nuevoContrato);
+        contratos.sort(null);
+    }
 
+    /**
+     * Elimina el contrato en el indice especificado
+     * @param index - indice del contrato a remover
+     */
+    public void eliminarContrato(int index){
+        contratos.remove(index);
+    }
     /**
      * Metodo que modifica la lista de contratos del proyecto con una nueva lista
      * @param contratos - nueva lista de contratos.
@@ -184,6 +201,22 @@ public class Proyecto {
     public ArrayList<Profesional> obtenerProfesionales() {
         return profesionales;
     }
+    
+    /**
+     * Metodo que agrega un profesional a la lista de profesionales
+     * @param profesional - profesional a agregar
+     */
+    public void agregarProfesional(Profesional profesional){
+        profesionales.add(profesional);
+    }
+    
+    /**
+     * Elimina el profesional en el indice especificado
+     * @param index - indice del profesional a remover
+     */
+    public void eliminarProfesional(int index){
+        profesionales.remove(index);
+    }
 
     /**
      * Metodo que modifica la lista de profesionales del proyecto con una nueva lista.
@@ -198,7 +231,7 @@ public class Proyecto {
      * @return actividades
      */
     public ArrayList<Actividad> obtenerActividades() {
-        if(!profesionales.isEmpty()){
+        if(profesionales.isEmpty()){
             for(Profesional profesional : profesionales)
                 for(Actividad actividad : profesional.obtenerActividades())
                     actividades.add(actividad);
