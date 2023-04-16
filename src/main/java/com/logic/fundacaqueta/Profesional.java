@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 /**
  * Clase que representara un profesional asociado a un proyecto de fundacaqueta
- *
  * @author nebel
  */
 public class Profesional {
