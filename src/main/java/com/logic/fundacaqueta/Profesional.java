@@ -4,30 +4,22 @@
  */
 package com.logic.fundacaqueta;
 
-import java.util.Date;
+import com.logic.fundacaqueta.abstractions.Usuario;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * Clase que representara un profesional asociado a un proyecto de fundacaqueta
+ * Clase que representara un profesional asociado a un proyecto de fundacaqueta que tambien es un Usuario
  * @author nebel
  */
-public class Profesional {
+public class Profesional extends Usuario{
 
     // ------------  Variables  -------------------
-    /**
-     * Nombre y apellido del profesional
-     */
-    private String nombre;
-
-    /**
-     * Numero de documento del profesional
-     */
-    private int documento;
 
     /**
      * Fecha de nacimiento del profesional (se utilizara para calcular edad)
      */
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     /**
      * Perfil del profesional (carrera o profesion).
@@ -45,9 +37,8 @@ public class Profesional {
     private ArrayList<Actividad> actividades;
 
     // ------------ Constructor -------------------
-    public Profesional(String nombre, int documento, Date fechaNacimiento, String perfil, String cargo) {
-        this.nombre = nombre;
-        this.documento = documento;
+    public Profesional(String nombreUsuario, String contraseña, String nombre, String correo, int documento, LocalDate fechaNacimiento, String perfil, String cargo) {
+        super(nombreUsuario, contraseña, nombre, correo, documento, Usuario.PROFESIONAL);
         this.fechaNacimiento = fechaNacimiento;
         this.perfil = perfil;
         this.cargo = cargo;
@@ -55,48 +46,13 @@ public class Profesional {
     }
 
     // ------------   Metodos   -------------------
-    /**
-     * Provee el nombre y apellido del profesional
-     *
-     * @return nombre - nombre y apellido del profesional
-     */
-    public String obtenerNombre() {
-        return nombre;
-    }
-
-    /**
-     * Modifica el nombre y apellido del profesional
-     *
-     * @param nombre - nueva cadena con nombre y apellido del profesional.
-     */
-    public void modificarNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * Provee el numero del documento del profesional
-     *
-     * @return documento - documento del profesional
-     */
-    public int obtenerDocumento() {
-        return documento;
-    }
-
-    /**
-     * Modifica el documento del profesional
-     *
-     * @param documento - nuevo numero de documento del profesional.
-     */
-    public void modificarDocumento(int documento) {
-        this.documento = documento;
-    }
 
     /**
      * Provee la fecha de nacimiento del profesional
      *
      * @return fechaNacimiento - fecha de nacimiento del profesional
      */
-    public Date obtenerFechaNacimiento() {
+    public LocalDate obtenerFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -105,7 +61,7 @@ public class Profesional {
      *
      * @param fechaNacimiento - nueva fecha de nacimiento del profesional.
      */
-    public void modificarFechaNacimiento(Date fechaNacimiento) {
+    public void modificarFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
