@@ -169,7 +169,7 @@ public abstract class Contrato implements Comparable<Contrato>{
         }
     }
     
-    
+    @Override
     public int compareTo(Contrato contrato){
         if(this.fechaInicio.isBefore(contrato.obtenerFechaInicio()))
             return 1;
