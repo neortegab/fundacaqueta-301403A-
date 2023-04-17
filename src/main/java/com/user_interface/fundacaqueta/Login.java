@@ -64,9 +64,9 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TxtPassword.setText("Ingrese su contraseña");
+        TxtPassword.setText("123456");
 
-        TxtUsername1.setText("Ingrese su usuario");
+        TxtUsername1.setText("test");
 
         BttnCancel.setText("Cancelar");
         BttnCancel.addActionListener(new java.awt.event.ActionListener() {

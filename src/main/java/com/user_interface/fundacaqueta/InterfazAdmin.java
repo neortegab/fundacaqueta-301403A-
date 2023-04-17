@@ -12,6 +12,8 @@ import com.logic.fundacaqueta.Profesional;
 import com.logic.fundacaqueta.Actividad;
 import com.logic.fundacaqueta.ContratoColaboracion;
 import java.time.LocalDate;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.ListModel;
 /**
  *
@@ -31,20 +33,20 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     private void showProyects(){
         ArrayList<Proyecto> proyectos = fundacaqueta.obtenerProyectos();
-        ArrayList<String> nombresProyectos = new ArrayList<String>();
+        DefaultListModel nombresProyectos = new DefaultListModel();
         for(Proyecto proyecto : proyectos){
-            nombresProyectos.add(proyecto.obtenerNombre());
+            nombresProyectos.addElement(proyecto.obtenerNombre());
         }
-        ListProyectos.setModel((ListModel<String>) nombresProyectos);
+        ListProyectos.setModel(nombresProyectos);
     }
     
     private void showProfessionals(){
         ArrayList<Profesional> profesionales = fundacaqueta.obtenerProfesionales();
-        ArrayList<String> nombreProfesionales = new ArrayList<String>();
+        DefaultListModel nombreProfesionales = new DefaultListModel();
         for(Profesional profesional : profesionales){
-            nombreProfesionales.add(profesional.obtenerNombre());
+            nombreProfesionales.addElement(profesional.obtenerNombre());
         }
-        ListProfesionales.setModel((ListModel<String>) nombreProfesionales);
+        ListProfesionales.setModel(nombreProfesionales);
     }
     
     private Proyecto obtainSelectedProject(){
@@ -108,29 +110,29 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     private void showProfessionalActivities(){
         Profesional profesionalSeleccionado = obtainSelectedProfessional();
-        ArrayList<String> nombreActividades = new ArrayList<String>();
+        DefaultListModel nombreActividades = new DefaultListModel();
         for(Actividad actividad : profesionalSeleccionado.obtenerActividades()){
-            nombreActividades.add(actividad.obtenerNombre());
+            nombreActividades.addElement(actividad.obtenerNombre());
         }
-        ListProfesionales.setModel((ListModel<String>) nombreActividades);
+        ListProfesionales.setModel(nombreActividades);
     }
     
     private void showProjectActivities(){
         Proyecto proyectoSeleccionado = obtainSelectedProject();
-        ArrayList<String> nombreActividades = new ArrayList<String>();
+        DefaultListModel nombreActividades = new DefaultListModel();
         for(Actividad actividad : proyectoSeleccionado.obtenerActividades()){
-            nombreActividades.add(actividad.obtenerNombre());
+            nombreActividades.addElement(actividad.obtenerNombre());
         }
-        ListActividadesProy.setModel((ListModel<String>) nombreActividades);
+        ListActividadesProy.setModel(nombreActividades);
     }
     
     private void showProjectContracts(){
         Proyecto proyectoSeleccionado = obtainSelectedProject();
-        ArrayList<String> objetivosContratos = new ArrayList<String>();
+        DefaultListModel objetivosContratos = new DefaultListModel();
         for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
-            objetivosContratos.add(contrato.obtenerObjetivo());
+            objetivosContratos.addElement(contrato.obtenerObjetivo());
         }
-        ListContratosProy.setModel((ListModel<String>) objetivosContratos);
+        ListContratosProy.setModel(objetivosContratos);
     }
     
     private void showDetailsProject(){
