@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.user_interface.fundacaqueta;
+package com.user_interface.fundacaqueta.Interfaces.Proyecto;
 
 /**
  *
  * @author nebel
  */
-public class AgregarProyecto extends javax.swing.JFrame {
+public class EliminarProyecto extends javax.swing.JFrame {
 
     /**
      * Creates new form AgregarProyecto
      */
-    public AgregarProyecto() {
+    public EliminarProyecto() {
         initComponents();
     }
 
