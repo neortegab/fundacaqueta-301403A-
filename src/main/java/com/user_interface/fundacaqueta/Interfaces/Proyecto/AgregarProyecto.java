@@ -6,10 +6,14 @@ package com.user_interface.fundacaqueta.Interfaces.Proyecto;
 
 //Java imports
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 //Logic imports
 import com.logic.fundacaqueta.Fundacaqueta;
 import com.logic.fundacaqueta.Proyecto;
+
+//Interface imports
+import com.user_interface.fundacaqueta.*;
 
 /**
  *
@@ -17,33 +21,74 @@ import com.logic.fundacaqueta.Proyecto;
  */
 public class AgregarProyecto extends javax.swing.JFrame {
 
+    private InterfazAdmin parentAdmin;
+    
+    private InterfazUsuarioAuxiliar parentAuxiliar;
+    
     private Fundacaqueta fundacaqueta;
     /**
      * Creates new form AgregarProyecto
      */
-    public AgregarProyecto(Fundacaqueta fundacaqueta) {
+    public AgregarProyecto(Fundacaqueta fundacaqueta, InterfazAdmin parentAdmin, InterfazUsuarioAuxiliar parentAuxiliar) {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.fundacaqueta = fundacaqueta;
+        if(parentAdmin != null)
+            this.parentAdmin = parentAdmin;
+        
+        if(parentAuxiliar != null)
+            this.parentAdmin = parentAdmin;
     }
     
     /**
      * Metodo que verifica que se hayan añadido los valores especificados
      */
-    private void revisarValores(){
+    private boolean revisarValores(){
+        boolean valoresValidos = true;
         String nombre = TxtNombre.getText();
         String lugarEjecucion = TxtLugarEjecucion.getText();
         
-        if(nombre.equals(""))
+        if(nombre.equals("") && lugarEjecucion.equals("")){
             JOptionPane.showMessageDialog(this, 
-                    "El nombre no puede ser vacío", 
+                    "El nombre y el lugar del ejecucion no pueden ser vacíos", 
                     "Nombre faltante", 
                     JOptionPane.ERROR_MESSAGE);
-        if(lugarEjecucion.equals(""))
+            return !valoresValidos;
+        }
+        if(lugarEjecucion.equals("")){
             JOptionPane.showMessageDialog(this, 
                     "El lugar de ejecución no puede ser vacío", 
                     "Lugar faltante", 
-                    JOptionPane.ERROR_MESSAGE);    
+                    JOptionPane.ERROR_MESSAGE);
+            return !valoresValidos;
+        }
+        if(nombre.equals("")){
+            JOptionPane.showMessageDialog(this, 
+                    "El nombre del proyecto no puede ser vacío", 
+                    "Nombre faltante", 
+                    JOptionPane.ERROR_MESSAGE);
+            return !valoresValidos;
+        }
+        return valoresValidos;
+    }
+    
+    /**
+     * Comprueba el tipo seleccionado en el combo box
+     * Si no hay tipo seleccionado se predetermina al primer tipo (Salud).
+     */
+    private String devolverTipoSeleccionado(){
+        String tipoSeleccionado = CBTipo.getSelectedItem().toString();
+        if(tipoSeleccionado.equals("")){
+            CBTipo.setSelectedIndex(0);
+            tipoSeleccionado = CBTipo.getSelectedItem().toString();
+        }
+        
+        if(tipoSeleccionado.equals("Salud"))
+            tipoSeleccionado = Proyecto.SALUD;
+        if(tipoSeleccionado.equals("Inversion social"))
+            tipoSeleccionado = Proyecto.INVERSION_SOCIAL;
+        
+        return tipoSeleccionado;
     }
 
     /**
@@ -149,7 +194,24 @@ public class AgregarProyecto extends javax.swing.JFrame {
 
     private void BttnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BttnConfirmarActionPerformed
         // TODO add your handling code here:
-        revisarValores();
+        if(revisarValores()){
+            String tipo = devolverTipoSeleccionado();
+            int confirmacion = JOptionPane.showConfirmDialog(this,
+            "¿Esta seguro de agregar el siguiente Proyecto?"
+            +"\nNombre: " + TxtNombre.getText() + "\n" + ""
+            +"Lugar ejecucion: "+TxtLugarEjecucion.getText()+"\n"
+            +"Tipo: "+tipo,
+            "Confirmar",
+            JOptionPane.YES_NO_OPTION);
+            if(confirmacion == JOptionPane.YES_OPTION){
+                Proyecto nuevoProyecto = new Proyecto(TxtNombre.getText(), TxtLugarEjecucion.getText(), tipo);
+                fundacaqueta.agregarProyecto(nuevoProyecto);
+                JOptionPane.showMessageDialog(this, "Proyecto agregado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                if(this.parentAdmin != null)
+                    parentAdmin.updateProjects();
+            }
+        }
     }//GEN-LAST:event_BttnConfirmarActionPerformed
 
     private void BttnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BttnCancelarActionPerformed

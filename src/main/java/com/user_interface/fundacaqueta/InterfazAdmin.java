@@ -32,16 +32,20 @@ public class InterfazAdmin extends javax.swing.JFrame {
     public InterfazAdmin(Fundacaqueta fundacaqueta) {
         initComponents();
         this.fundacaqueta = fundacaqueta;
-        showProyects();
+        showProjects();
     }
     
-    private void showProyects(){
+    private void showProjects(){
         ArrayList<Proyecto> proyectos = fundacaqueta.obtenerProyectos();
         DefaultListModel nombresProyectos = new DefaultListModel();
         for(Proyecto proyecto : proyectos){
             nombresProyectos.addElement(proyecto.obtenerNombre());
         }
         ListProyectos.setModel(nombresProyectos);
+    }
+    
+    public void updateProjects(){
+        showProjects();
     }
     
     private void showProfessionals(){
@@ -780,8 +784,9 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
     private void MenuBttnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarProyectoActionPerformed
         // TODO add your handling code here:
-        AgregarProyecto addProject = new AgregarProyecto(fundacaqueta);
+        AgregarProyecto addProject = new AgregarProyecto(fundacaqueta, this, null);
         addProject.setVisible(true);
+        
     }//GEN-LAST:event_MenuBttnAgregarProyectoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
