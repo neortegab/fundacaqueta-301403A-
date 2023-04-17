@@ -4,17 +4,21 @@
  */
 package com.user_interface.fundacaqueta;
 
+
+import com.logic.fundacaqueta.Fundacaqueta;
 /**
  *
  * @author nebel
  */
 public class InterfazAdmin extends javax.swing.JFrame {
 
+    private Fundacaqueta fundacaqueta;
     /**
      * Creates new form InterfazAdmin
      */
-    public InterfazAdmin() {
+    public InterfazAdmin(Fundacaqueta fundacaqueta) {
         initComponents();
+        this.fundacaqueta = fundacaqueta;
     }
 
     /**
@@ -26,57 +30,346 @@ public class InterfazAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelProyectos = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        SPaneProyectos = new javax.swing.JScrollPane();
+        ListProyectos = new javax.swing.JList<>();
+        PanelProfesionales = new javax.swing.JPanel();
+        SPaneProfesionales = new javax.swing.JScrollPane();
+        ListProfesionales = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList5 = new javax.swing.JList<>();
+        PanelActividadesProy = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        SPaneActividadesProy = new javax.swing.JScrollPane();
+        ListActividadesProy = new javax.swing.JList<>();
+        PanelContratosProy = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        SPaneContratosProy = new javax.swing.JScrollPane();
+        ListContratosProy = new javax.swing.JList<>();
+        BarOptions = new javax.swing.JMenuBar();
+        MenuProyectos = new javax.swing.JMenu();
+        MenuBttnAgregarProyecto = new javax.swing.JMenuItem();
+        MenuBttnEditarProyecto = new javax.swing.JMenuItem();
+        MenuBttnEliminarProyecto = new javax.swing.JMenuItem();
+        MenuBttnFiltrarProyectos = new javax.swing.JMenuItem();
+        MenuProfesionales = new javax.swing.JMenu();
+        MenuBttnAgregarProfesional = new javax.swing.JMenuItem();
+        MenuBttnEditarProfesional = new javax.swing.JMenuItem();
+        Eliminar = new javax.swing.JMenuItem();
+        MenuActividades = new javax.swing.JMenu();
+        MenuBttnAgregarActividad = new javax.swing.JMenuItem();
+        MenuBttnEditarActividad = new javax.swing.JMenuItem();
+        MenuBttnEliminarActividad = new javax.swing.JMenuItem();
+        MenuContratos = new javax.swing.JMenu();
+        MenuBttnVerContrato = new javax.swing.JMenuItem();
+        MenuBttnAgregarContrato = new javax.swing.JMenuItem();
+        MenuBttnEditarContrato = new javax.swing.JMenuItem();
+        EliminarContrato = new javax.swing.JMenuItem();
+        MenuUsuarios = new javax.swing.JMenu();
+        MenuBttnAdminUsuarios = new javax.swing.JMenuItem();
+        MenuSalir = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        PanelProyectos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel1.setText("Proyectos");
+
+        ListProyectos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        SPaneProyectos.setViewportView(ListProyectos);
+
+        javax.swing.GroupLayout PanelProyectosLayout = new javax.swing.GroupLayout(PanelProyectos);
+        PanelProyectos.setLayout(PanelProyectosLayout);
+        PanelProyectosLayout.setHorizontalGroup(
+            PanelProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelProyectosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(PanelProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelProyectosLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(SPaneProyectos)
+                    .addContainerGap()))
+        );
+        PanelProyectosLayout.setVerticalGroup(
+            PanelProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelProyectosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelProyectosLayout.createSequentialGroup()
+                    .addGap(31, 31, 31)
+                    .addComponent(SPaneProyectos, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        PanelProfesionales.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        ListProfesionales.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        SPaneProfesionales.setViewportView(ListProfesionales);
+
+        jLabel3.setText("Profesionales");
+
+        jLabel5.setText("Actividades del profesional");
+
+        jList5.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(jList5);
+
+        javax.swing.GroupLayout PanelProfesionalesLayout = new javax.swing.GroupLayout(PanelProfesionales);
+        PanelProfesionales.setLayout(PanelProfesionalesLayout);
+        PanelProfesionalesLayout.setHorizontalGroup(
+            PanelProfesionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelProfesionalesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelProfesionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SPaneProfesionales)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelProfesionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PanelProfesionalesLayout.setVerticalGroup(
+            PanelProfesionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelProfesionalesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelProfesionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelProfesionalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SPaneProfesionales)
+                    .addComponent(jScrollPane5))
+                .addContainerGap())
+        );
+
+        PanelActividadesProy.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setText("Actividades del proyecto");
+
+        ListActividadesProy.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        SPaneActividadesProy.setViewportView(ListActividadesProy);
+
+        javax.swing.GroupLayout PanelActividadesProyLayout = new javax.swing.GroupLayout(PanelActividadesProy);
+        PanelActividadesProy.setLayout(PanelActividadesProyLayout);
+        PanelActividadesProyLayout.setHorizontalGroup(
+            PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelActividadesProyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(SPaneActividadesProy)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelActividadesProyLayout.setVerticalGroup(
+            PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelActividadesProyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SPaneActividadesProy, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        PanelContratosProy.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel4.setText("Contratos del proyecto");
+
+        ListContratosProy.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        SPaneContratosProy.setViewportView(ListContratosProy);
+
+        javax.swing.GroupLayout PanelContratosProyLayout = new javax.swing.GroupLayout(PanelContratosProy);
+        PanelContratosProy.setLayout(PanelContratosProyLayout);
+        PanelContratosProyLayout.setHorizontalGroup(
+            PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelContratosProyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SPaneContratosProy)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PanelContratosProyLayout.setVerticalGroup(
+            PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelContratosProyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SPaneContratosProy)
+                .addContainerGap())
+        );
+
+        MenuProyectos.setText("Proyectos");
+
+        MenuBttnAgregarProyecto.setText("Agregar");
+        MenuProyectos.add(MenuBttnAgregarProyecto);
+
+        MenuBttnEditarProyecto.setText("Modificar");
+        MenuProyectos.add(MenuBttnEditarProyecto);
+
+        MenuBttnEliminarProyecto.setText("Eliminar");
+        MenuProyectos.add(MenuBttnEliminarProyecto);
+
+        MenuBttnFiltrarProyectos.setText("Filtrar");
+        MenuProyectos.add(MenuBttnFiltrarProyectos);
+
+        BarOptions.add(MenuProyectos);
+
+        MenuProfesionales.setText("Profesionales");
+
+        MenuBttnAgregarProfesional.setText("Agregar");
+        MenuProfesionales.add(MenuBttnAgregarProfesional);
+
+        MenuBttnEditarProfesional.setText("Editar");
+        MenuProfesionales.add(MenuBttnEditarProfesional);
+
+        Eliminar.setText("Eliminar");
+        MenuProfesionales.add(Eliminar);
+
+        BarOptions.add(MenuProfesionales);
+
+        MenuActividades.setText("Actividades");
+
+        MenuBttnAgregarActividad.setText("Agregar");
+        MenuActividades.add(MenuBttnAgregarActividad);
+
+        MenuBttnEditarActividad.setText("Editar");
+        MenuActividades.add(MenuBttnEditarActividad);
+
+        MenuBttnEliminarActividad.setText("Eliminar");
+        MenuActividades.add(MenuBttnEliminarActividad);
+
+        BarOptions.add(MenuActividades);
+
+        MenuContratos.setText("Contratos");
+
+        MenuBttnVerContrato.setText("Ver contrato");
+        MenuContratos.add(MenuBttnVerContrato);
+
+        MenuBttnAgregarContrato.setText("Agregar");
+        MenuContratos.add(MenuBttnAgregarContrato);
+
+        MenuBttnEditarContrato.setText("Editar");
+        MenuContratos.add(MenuBttnEditarContrato);
+
+        EliminarContrato.setText("Eliminar");
+        MenuContratos.add(EliminarContrato);
+
+        BarOptions.add(MenuContratos);
+
+        MenuUsuarios.setText("Usuarios");
+
+        MenuBttnAdminUsuarios.setText("Administrar");
+        MenuUsuarios.add(MenuBttnAdminUsuarios);
+
+        BarOptions.add(MenuUsuarios);
+
+        MenuSalir.setText("Salir");
+        BarOptions.add(MenuSalir);
+
+        setJMenuBar(BarOptions);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelProfesionales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelActividadesProy, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PanelContratosProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelProyectos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelProfesionales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelActividadesProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PanelContratosProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfazAdmin().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar BarOptions;
+    private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JMenuItem EliminarContrato;
+    private javax.swing.JList<String> ListActividadesProy;
+    private javax.swing.JList<String> ListContratosProy;
+    private javax.swing.JList<String> ListProfesionales;
+    private javax.swing.JList<String> ListProyectos;
+    private javax.swing.JMenu MenuActividades;
+    private javax.swing.JMenuItem MenuBttnAdminUsuarios;
+    private javax.swing.JMenuItem MenuBttnAgregarActividad;
+    private javax.swing.JMenuItem MenuBttnAgregarContrato;
+    private javax.swing.JMenuItem MenuBttnAgregarProfesional;
+    private javax.swing.JMenuItem MenuBttnAgregarProyecto;
+    private javax.swing.JMenuItem MenuBttnEditarActividad;
+    private javax.swing.JMenuItem MenuBttnEditarContrato;
+    private javax.swing.JMenuItem MenuBttnEditarProfesional;
+    private javax.swing.JMenuItem MenuBttnEditarProyecto;
+    private javax.swing.JMenuItem MenuBttnEliminarActividad;
+    private javax.swing.JMenuItem MenuBttnEliminarProyecto;
+    private javax.swing.JMenuItem MenuBttnFiltrarProyectos;
+    private javax.swing.JMenuItem MenuBttnVerContrato;
+    private javax.swing.JMenu MenuContratos;
+    private javax.swing.JMenu MenuProfesionales;
+    private javax.swing.JMenu MenuProyectos;
+    private javax.swing.JMenu MenuSalir;
+    private javax.swing.JMenu MenuUsuarios;
+    private javax.swing.JPanel PanelActividadesProy;
+    private javax.swing.JPanel PanelContratosProy;
+    private javax.swing.JPanel PanelProfesionales;
+    private javax.swing.JPanel PanelProyectos;
+    private javax.swing.JScrollPane SPaneActividadesProy;
+    private javax.swing.JScrollPane SPaneContratosProy;
+    private javax.swing.JScrollPane SPaneProfesionales;
+    private javax.swing.JScrollPane SPaneProyectos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JList<String> jList5;
+    private javax.swing.JScrollPane jScrollPane5;
     // End of variables declaration//GEN-END:variables
 }

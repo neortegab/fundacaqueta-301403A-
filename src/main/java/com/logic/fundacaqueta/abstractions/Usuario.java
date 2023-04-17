@@ -35,6 +35,23 @@ public abstract class Usuario {
     }
     
     // ------------------- Metodos ---------------------
+
+    public String obtenerNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void modificarNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String obtenerContraseña() {
+        return contraseña;
+    }
+
+    public void modificarContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+    
     
     /**
      * Metodo que provee el tipo de usuario
