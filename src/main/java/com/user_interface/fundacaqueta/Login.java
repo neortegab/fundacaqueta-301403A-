@@ -177,7 +177,7 @@ public class Login extends javax.swing.JFrame {
 
     private void BttnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BttnCancelActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_BttnCancelActionPerformed
 
     private boolean checkIfOnList(String user, String password) {

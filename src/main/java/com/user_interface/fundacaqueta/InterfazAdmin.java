@@ -4,17 +4,21 @@
  */
 package com.user_interface.fundacaqueta;
 
+//Java imports
 import java.util.ArrayList;
 import java.time.Period;
+import java.time.LocalDate;
+import javax.swing.DefaultListModel;
+
+//Logic imports
 import com.logic.fundacaqueta.Fundacaqueta;
 import com.logic.fundacaqueta.Proyecto;
 import com.logic.fundacaqueta.Profesional;
 import com.logic.fundacaqueta.Actividad;
 import com.logic.fundacaqueta.ContratoColaboracion;
-import java.time.LocalDate;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.ListModel;
+
+//Interface imports
+import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
 /**
  *
  * @author nebel
@@ -263,11 +267,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("Proyectos");
 
-        ListProyectos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListProyectos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 ListProyectosValueChanged(evt);
@@ -350,11 +349,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         PanelProfesionales.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        ListProfesionales.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListProfesionales.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 ListProfesionalesValueChanged(evt);
@@ -383,11 +377,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jLabel5.setText("Actividades del profesional");
 
-        ListActividadesProf.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListActividadesProf.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 ListActividadesProfValueChanged(evt);
@@ -502,11 +491,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jLabel2.setText("Actividades del proyecto");
 
-        ListActividadesProy.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListActividadesProy.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 ListActividadesProyValueChanged(evt);
@@ -566,11 +550,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jLabel4.setText("Contratos del proyecto");
 
-        ListContratosProy.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListContratosProy.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 ListContratosProyValueChanged(evt);
@@ -654,6 +633,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuProyectos.setText("Proyectos");
 
         MenuBttnAgregarProyecto.setText("Agregar");
+        MenuBttnAgregarProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnAgregarProyectoActionPerformed(evt);
+            }
+        });
         MenuProyectos.add(MenuBttnAgregarProyecto);
 
         MenuBttnEditarProyecto.setText("Modificar");
@@ -793,6 +777,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         showDetailsContract();
     }//GEN-LAST:event_ListContratosProyValueChanged
+
+    private void MenuBttnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarProyectoActionPerformed
+        // TODO add your handling code here:
+        AgregarProyecto addProject = new AgregarProyecto(fundacaqueta);
+        addProject.setVisible(true);
+    }//GEN-LAST:event_MenuBttnAgregarProyectoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
