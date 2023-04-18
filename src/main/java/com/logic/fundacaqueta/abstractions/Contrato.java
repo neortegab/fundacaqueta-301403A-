@@ -137,6 +137,7 @@ public abstract class Contrato implements Comparable<Contrato>{
      * "El contrato tuvo una duracion de X años Y meses Z dias".
      */
     public String obtenerDuracion() {
+        calcularDuracion();
         return duracion;
     }
 

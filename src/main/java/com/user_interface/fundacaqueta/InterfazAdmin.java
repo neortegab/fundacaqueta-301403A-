@@ -26,6 +26,10 @@ import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
 public class InterfazAdmin extends javax.swing.JFrame {
 
     private Fundacaqueta fundacaqueta;
+    
+    private Proyecto proyectoSeleccionado;
+    
+    private Profesional profesionalSeleccionado;
     /**
      * Creates new form InterfazAdmin
      */
@@ -42,6 +46,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
             nombresProyectos.addElement(proyecto.obtenerNombre());
         }
         ListProyectos.setModel(nombresProyectos);
+        proyectoSeleccionado = proyectos.get(0);
     }
     
     public void updateProjects(){
@@ -49,7 +54,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showProfessionals(){
-        ArrayList<Profesional> profesionales = fundacaqueta.obtenerProfesionales();
+        ArrayList<Profesional> profesionales = proyectoSeleccionado.obtenerProfesionales();
         DefaultListModel nombreProfesionales = new DefaultListModel();
         for(Profesional profesional : profesionales){
             nombreProfesionales.addElement(profesional.obtenerNombre());
@@ -59,7 +64,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     private Proyecto obtainSelectedProject(){
         String nombreProyectoSeleccionado = ListProyectos.getSelectedValue();
-        Proyecto proyectoSeleccionado = null;
         for(Proyecto proyecto : fundacaqueta.obtenerProyectos()){
             if(proyecto.obtenerNombre().equals(nombreProyectoSeleccionado))
                 proyectoSeleccionado = proyecto;
@@ -69,8 +73,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     private Profesional obtainSelectedProfessional(){
         String nombreProfesionalSeleccionado = ListProfesionales.getSelectedValue();
-        Profesional profesionalSeleccionado = null;
-        for(Profesional profesional : fundacaqueta.obtenerProfesionales()){
+        
+        for(Profesional profesional : obtainSelectedProject().obtenerProfesionales()){
             if(profesional.obtenerNombre().equals(nombreProfesionalSeleccionado))
                 profesionalSeleccionado = profesional;
         }
@@ -81,8 +85,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
         Actividad actividadSeleccionada = null;
         
         String nombreActividadSeleccionada = ListActividadesProy.getSelectedValue();
-        Proyecto proyectoActual = obtainSelectedProject();
-        for(Actividad actividad : proyectoActual.obtenerActividades()){
+        for(Actividad actividad : proyectoSeleccionado.obtenerActividades()){
             if(actividad.obtenerNombre().equals(nombreActividadSeleccionada))
                 actividadSeleccionada = actividad;
         }
@@ -94,8 +97,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
         Actividad actividadSeleccionada = null;
         
         String nombreActividadSeleccionada = ListActividadesProf.getSelectedValue();
-        Profesional profesionalActual = obtainSelectedProfessional();
-        for(Actividad actividad : profesionalActual.obtenerActividades()){
+        for(Actividad actividad : profesionalSeleccionado.obtenerActividades()){
             if(actividad.obtenerNombre().equals(nombreActividadSeleccionada))
                 actividadSeleccionada = actividad;
         }
@@ -107,8 +109,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
         ContratoColaboracion contractoSeleccionado = null;
         
         String objetivoContrato = ListContratosProy.getSelectedValue();
-        Proyecto proyectoActual = obtainSelectedProject();
-        for(ContratoColaboracion contrato : proyectoActual.obtenerContratos()){
+        for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
             if(contrato.obtenerObjetivo().equals(objetivoContrato))
                 contractoSeleccionado = contrato;
         }
@@ -117,16 +118,15 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showProfessionalActivities(){
-        Profesional profesionalSeleccionado = obtainSelectedProfessional();
+        profesionalSeleccionado = obtainSelectedProfessional();
         DefaultListModel nombreActividades = new DefaultListModel();
         for(Actividad actividad : profesionalSeleccionado.obtenerActividades()){
             nombreActividades.addElement(actividad.obtenerNombre());
         }
-        ListProfesionales.setModel(nombreActividades);
+        ListActividadesProf.setModel(nombreActividades);
     }
     
     private void showProjectActivities(){
-        Proyecto proyectoSeleccionado = obtainSelectedProject();
         DefaultListModel nombreActividades = new DefaultListModel();
         for(Actividad actividad : proyectoSeleccionado.obtenerActividades()){
             nombreActividades.addElement(actividad.obtenerNombre());
@@ -135,7 +135,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showProjectContracts(){
-        Proyecto proyectoSeleccionado = obtainSelectedProject();
         DefaultListModel objetivosContratos = new DefaultListModel();
         for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
             objetivosContratos.addElement(contrato.obtenerObjetivo());
@@ -144,7 +143,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showDetailsProject(){
-        Proyecto proyectoSeleccionado = obtainSelectedProject();
+        proyectoSeleccionado = obtainSelectedProject();
         TxtLugarEjecucion.setText(proyectoSeleccionado.obtenerLugarEjecucion());
         TxtTipo.setText(proyectoSeleccionado.obtenerTipo());
         TxtFechaInicio.setText(proyectoSeleccionado.obtenerFechaInicio().toString());
@@ -154,7 +153,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showDetailsProfessional(){
-        Profesional profesionalSeleccionado = obtainSelectedProfessional();
+        profesionalSeleccionado = obtainSelectedProfessional();
         TxtCargo.setText(profesionalSeleccionado.obtenerCargo());
         TxtPerfil.setText(profesionalSeleccionado.obtenerPerfil());
         String edadProfesional = "";
@@ -171,8 +170,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     private void showDetailsProjectActivity(){
         Actividad actividadSeleccionada = obtainSelectedActivity();
-        TxtDescripcionActividadProf.setText(actividadSeleccionada.obtenerDescripcion());
-        TxtAreaActividadProf.setText(actividadSeleccionada.obtenerArea());
+        TxtDescripcionActividadesProy.setText(actividadSeleccionada.obtenerDescripcion());
+        TxtAreaActividadesProy.setText(actividadSeleccionada.obtenerArea());
     }
     
     private void showDetailsContract(){
@@ -224,16 +223,14 @@ public class InterfazAdmin extends javax.swing.JFrame {
         TxtAreaActividadProf = new javax.swing.JTextField();
         PanelActividadesProy = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        SPaneActividadesProy = new javax.swing.JScrollPane();
-        ListActividadesProy = new javax.swing.JList<>();
         TxtDescripcionActividadesProy = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         TxtAreaActividadesProy = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ListActividadesProy = new javax.swing.JList<>();
         PanelContratosProy = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        SPaneContratosProy = new javax.swing.JScrollPane();
-        ListContratosProy = new javax.swing.JList<>();
         jLabel19 = new javax.swing.JLabel();
         TxtDuracion = new javax.swing.JTextField();
         TxtValorContrato = new javax.swing.JTextField();
@@ -242,6 +239,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         TxtTipoContrato = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListContratosProy = new javax.swing.JList<>();
         BarOptions = new javax.swing.JMenuBar();
         MenuProyectos = new javax.swing.JMenu();
         MenuBttnAgregarProyecto = new javax.swing.JMenuItem();
@@ -332,7 +331,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SPaneProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(TxtLugarEjecucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -495,13 +494,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jLabel2.setText("Actividades del proyecto");
 
-        ListActividadesProy.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                ListActividadesProyValueChanged(evt);
-            }
-        });
-        SPaneActividadesProy.setViewportView(ListActividadesProy);
-
         TxtDescripcionActividadesProy.setEditable(false);
         TxtDescripcionActividadesProy.setEnabled(false);
 
@@ -512,54 +504,54 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jLabel15.setText("Descripcion:");
 
+        ListActividadesProy.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListActividadesProyValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(ListActividadesProy);
+
         javax.swing.GroupLayout PanelActividadesProyLayout = new javax.swing.GroupLayout(PanelActividadesProy);
         PanelActividadesProy.setLayout(PanelActividadesProyLayout);
         PanelActividadesProyLayout.setHorizontalGroup(
             PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelActividadesProyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelActividadesProyLayout.createSequentialGroup()
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtAreaActividadesProy))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelActividadesProyLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelActividadesProyLayout.createSequentialGroup()
+                        .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtDescripcionActividadesProy))
-                        .addComponent(SPaneActividadesProy, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtAreaActividadesProy)
+                            .addComponent(TxtDescripcionActividadesProy)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         PanelActividadesProyLayout.setVerticalGroup(
             PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelActividadesProyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SPaneActividadesProy, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(TxtDescripcionActividadesProy, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelActividadesProyLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(TxtDescripcionActividadesProy))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(TxtAreaActividadesProy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         PanelContratosProy.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel4.setText("Contratos del proyecto");
-
-        ListContratosProy.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                ListContratosProyValueChanged(evt);
-            }
-        });
-        SPaneContratosProy.setViewportView(ListContratosProy);
 
         jLabel19.setText("Fecha inicio:");
 
@@ -581,28 +573,35 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jLabel18.setText("Valor");
 
+        ListContratosProy.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListContratosProyValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(ListContratosProy);
+
         javax.swing.GroupLayout PanelContratosProyLayout = new javax.swing.GroupLayout(PanelContratosProy);
         PanelContratosProy.setLayout(PanelContratosProyLayout);
         PanelContratosProyLayout.setHorizontalGroup(
             PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelContratosProyLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelContratosProyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SPaneContratosProy, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(PanelContratosProyLayout.createSequentialGroup()
+                .addGroup(PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelContratosProyLayout.createSequentialGroup()
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtTipoContrato, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
-                    .addGroup(PanelContratosProyLayout.createSequentialGroup()
+                        .addComponent(TxtTipoContrato))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelContratosProyLayout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtValorContrato))
-                    .addGroup(PanelContratosProyLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelContratosProyLayout.createSequentialGroup()
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtFechaInicioContrato))
-                    .addGroup(PanelContratosProyLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelContratosProyLayout.createSequentialGroup()
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtDuracion)))
@@ -612,9 +611,9 @@ public class InterfazAdmin extends javax.swing.JFrame {
             PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelContratosProyLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SPaneContratosProy, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelContratosProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
@@ -725,7 +724,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PanelProfesionales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelActividadesProy, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PanelActividadesProy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PanelContratosProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -735,14 +734,15 @@ public class InterfazAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelProyectos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelProfesionales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(PanelActividadesProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PanelContratosProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(PanelContratosProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PanelActividadesProy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -750,7 +750,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
     private void MenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSalirActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_MenuSalirActionPerformed
 
     private void ListProyectosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListProyectosValueChanged
@@ -772,6 +772,13 @@ public class InterfazAdmin extends javax.swing.JFrame {
         showDetailsProfessionalActivity();
     }//GEN-LAST:event_ListActividadesProfValueChanged
 
+    private void MenuBttnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarProyectoActionPerformed
+        // TODO add your handling code here:
+        AgregarProyecto addProject = new AgregarProyecto(fundacaqueta, this, null);
+        addProject.setVisible(true);
+        
+    }//GEN-LAST:event_MenuBttnAgregarProyectoActionPerformed
+
     private void ListActividadesProyValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListActividadesProyValueChanged
         // TODO add your handling code here:
         showDetailsProjectActivity();
@@ -781,13 +788,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         showDetailsContract();
     }//GEN-LAST:event_ListContratosProyValueChanged
-
-    private void MenuBttnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarProyectoActionPerformed
-        // TODO add your handling code here:
-        AgregarProyecto addProject = new AgregarProyecto(fundacaqueta, this, null);
-        addProject.setVisible(true);
-        
-    }//GEN-LAST:event_MenuBttnAgregarProyectoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
@@ -823,8 +823,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel PanelProfesionales;
     private javax.swing.JPanel PanelProyectos;
     private javax.swing.JScrollPane SPaneActividadesProf;
-    private javax.swing.JScrollPane SPaneActividadesProy;
-    private javax.swing.JScrollPane SPaneContratosProy;
     private javax.swing.JScrollPane SPaneProfesionales;
     private javax.swing.JScrollPane SPaneProyectos;
     private javax.swing.JTextField TxtAreaActividadProf;
@@ -862,5 +860,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

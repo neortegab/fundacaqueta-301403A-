@@ -130,9 +130,9 @@ public class Proyecto {
     public LocalDate obtenerFechaFin() {
         if(!contratos.isEmpty()){
             ContratoColaboracion ultimoContrato = contratos.get(contratos.size()-1);
-            LocalDate fechaFinContrato = ultimoContrato.obtenerFechaFin();
-            if(!(fechaFinContrato.equals(null)))
-                fechaFin = fechaFinContrato;
+            if(ultimoContrato.obtenerFechaFin() != null){
+                fechaFin = ultimoContrato.obtenerFechaFin();
+            }
         } 
         return fechaFin;
     }
@@ -231,7 +231,7 @@ public class Proyecto {
      * @return actividades
      */
     public ArrayList<Actividad> obtenerActividades() {
-        if(profesionales.isEmpty()){
+        if(!profesionales.isEmpty()){
             for(Profesional profesional : profesionales)
                 for(Actividad actividad : profesional.obtenerActividades())
                     actividades.add(actividad);

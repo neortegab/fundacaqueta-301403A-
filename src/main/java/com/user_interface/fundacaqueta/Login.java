@@ -12,6 +12,9 @@ import com.logic.fundacaqueta.Administrador;
 import com.logic.fundacaqueta.Auxiliar;
 import com.logic.fundacaqueta.Profesional;
 import com.logic.fundacaqueta.Proyecto;
+import com.logic.fundacaqueta.Actividad;
+import com.logic.fundacaqueta.ContratoColaboracion;
+import com.logic.fundacaqueta.ContratoLaboral;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,7 +41,17 @@ public class Login extends javax.swing.JFrame {
         
         LocalDate someBirthday = LocalDate.of(1995, Month.MARCH, 12);
         Profesional profTest = new Profesional("test2", "123456", "John Doe", "john@doe.com", 123456, someBirthday, "ingeniero", "programador");
+        
+        Actividad activityTest = new Actividad("Test", "Test", "Test");
+        profTest.agregarActividad(activityTest);
+        
+        ContratoLaboral contratoLabTest = new ContratoLaboral("Test", "Test", 10000);
+        profTest.modificarContrato(contratoLabTest);
+        
+        ContratoColaboracion contratoColTest = new ContratoColaboracion("Test", "Test", 100000);
+        
         Proyecto proyTest = new Proyecto("Prueba", "Florencia", Proyecto.INVERSION_SOCIAL);
+        proyTest.agregarContrato(contratoColTest);
         proyTest.agregarProfesional(profTest);
         fundacaqueta.agregarProyecto(proyTest);
         //End of adding test data
