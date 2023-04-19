@@ -27,18 +27,16 @@
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="TxtUsername1" min="-2" pref="270" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="TxtUsername1" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="69" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="TxtPassword" min="-2" pref="270" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="BttnLogin1" min="-2" pref="117" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="BttnCancel" min="-2" pref="117" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="BttnLogin1" min="-2" pref="117" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="BttnCancel" min="-2" pref="117" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel2" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
+                  <Component id="TxtPassword" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
@@ -53,8 +51,8 @@
               <Component id="TxtUsername1" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="28" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-              <Component id="TxtPassword" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="TxtPassword" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BttnLogin1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
@@ -71,11 +69,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="TxtPassword">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="123456"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="TxtUsername1">
       <Properties>
         <Property name="text" type="java.lang.String" value="test"/>
@@ -157,5 +150,10 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JPasswordField" name="TxtPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="123456"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

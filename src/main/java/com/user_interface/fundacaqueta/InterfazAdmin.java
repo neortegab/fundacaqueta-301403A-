@@ -262,7 +262,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
         EliminarContrato = new javax.swing.JMenuItem();
         MenuUsuarios = new javax.swing.JMenu();
         MenuBttnAdminUsuarios = new javax.swing.JMenuItem();
-        MenuSalir = new javax.swing.JMenu();
+        MenuOpciones = new javax.swing.JMenu();
+        menuItemSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -516,18 +517,23 @@ public class InterfazAdmin extends javax.swing.JFrame {
         PanelActividadesProyLayout.setHorizontalGroup(
             PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelActividadesProyLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelActividadesProyLayout.createSequentialGroup()
-                        .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtAreaActividadesProy)
-                            .addComponent(TxtDescripcionActividadesProy)))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelActividadesProyLayout.createSequentialGroup()
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelActividadesProyLayout.createSequentialGroup()
+                                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtAreaActividadesProy, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                                    .addComponent(TxtDescripcionActividadesProy)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(PanelActividadesProyLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelActividadesProyLayout.setVerticalGroup(
             PanelActividadesProyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,13 +714,17 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         BarOptions.add(MenuUsuarios);
 
-        MenuSalir.setText("Salir");
-        MenuSalir.addActionListener(new java.awt.event.ActionListener() {
+        MenuOpciones.setText("Opciones");
+
+        menuItemSalir.setText("Salir");
+        menuItemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuSalirActionPerformed(evt);
+                menuItemSalirActionPerformed(evt);
             }
         });
-        BarOptions.add(MenuSalir);
+        MenuOpciones.add(menuItemSalir);
+
+        BarOptions.add(MenuOpciones);
 
         setJMenuBar(BarOptions);
 
@@ -752,11 +762,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void MenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSalirActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_MenuSalirActionPerformed
 
     private void ListProyectosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListProyectosValueChanged
         // TODO add your handling code here:
@@ -800,6 +805,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         editar.setVisible(true);
     }//GEN-LAST:event_MenuBttnEditarProyectoActionPerformed
 
+    private void menuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_menuItemSalirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
     private javax.swing.JMenuItem Eliminar;
@@ -824,9 +834,9 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuBttnFiltrarProyectos;
     private javax.swing.JMenuItem MenuBttnVerContrato;
     private javax.swing.JMenu MenuContratos;
+    private javax.swing.JMenu MenuOpciones;
     private javax.swing.JMenu MenuProfesionales;
     private javax.swing.JMenu MenuProyectos;
-    private javax.swing.JMenu MenuSalir;
     private javax.swing.JMenu MenuUsuarios;
     private javax.swing.JPanel PanelActividadesProfesional;
     private javax.swing.JPanel PanelActividadesProy;
@@ -873,5 +883,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem menuItemSalir;
     // End of variables declaration//GEN-END:variables
 }
