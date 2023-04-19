@@ -644,6 +644,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuProyectos.add(MenuBttnAgregarProyecto);
 
         MenuBttnEditarProyecto.setText("Modificar");
+        MenuBttnEditarProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnEditarProyectoActionPerformed(evt);
+            }
+        });
         MenuProyectos.add(MenuBttnEditarProyecto);
 
         MenuBttnEliminarProyecto.setText("Eliminar");
@@ -788,6 +793,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         showDetailsContract();
     }//GEN-LAST:event_ListContratosProyValueChanged
+
+    private void MenuBttnEditarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnEditarProyectoActionPerformed
+        // TODO add your handling code here:
+        EditarProyecto editar = new EditarProyecto(fundacaqueta);
+        editar.setVisible(true);
+    }//GEN-LAST:event_MenuBttnEditarProyectoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;

@@ -57,7 +57,7 @@ public class EditarProyecto extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo:");
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Salud", "Inversión social" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Salud", "Inversion social" }));
 
         bttnConfirmar.setText("Confirmar");
 
@@ -146,14 +146,19 @@ public class EditarProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_ftxtIdPropertyChange
 
     private void revisarValorId(){
-        int id = (Integer) ftxtId.getValue();
-        if(id < 0)
-            JOptionPane.showMessageDialog(this, "El id no puede ser negativo", "Id invalido", JOptionPane.ERROR_MESSAGE);
-        else{
-            if(fundacaqueta.obtenerProyectos().get(id) != null)
-                mostrarDetallesProyectoBuscado(id);
-            else
-                JOptionPane.showMessageDialog(this, "El proyecto indicado no existe", "Proyecto no existe", JOptionPane.ERROR_MESSAGE);
+        if(ftxtId.getValue() != null){
+            int id = Math.toIntExact((Long)ftxtId.getValue());
+            id-=1;
+            if(id < 0)
+                JOptionPane.showMessageDialog(this, "El id no puede ser negativo o cero", "Id invalido", JOptionPane.ERROR_MESSAGE);
+            else{
+                if(id > fundacaqueta.obtenerProyectos().size()-1)
+                    JOptionPane.showMessageDialog(this, "No existe esta cantidad de proyectos", "Id invalido", JOptionPane.ERROR_MESSAGE);
+                if(fundacaqueta.obtenerProyectos().get(id) != null)
+                    mostrarDetallesProyectoBuscado(id);
+                else
+                    JOptionPane.showMessageDialog(this, "El proyecto indicado no existe", "Proyecto no existe", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     

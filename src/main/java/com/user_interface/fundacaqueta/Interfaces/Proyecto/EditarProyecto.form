@@ -115,7 +115,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
             <StringItem index="0" value="Salud"/>
-            <StringItem index="1" value="Inversi&#xf3;n social"/>
+            <StringItem index="1" value="Inversion social"/>
           </StringArray>
         </Property>
       </Properties>
