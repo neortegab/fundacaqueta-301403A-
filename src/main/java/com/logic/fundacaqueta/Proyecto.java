@@ -254,5 +254,14 @@ public class Proyecto {
     public String obtenerTipo() {
         return tipo;
     }
+    
+    /**
+     * Modifica el tipo del proyecto
+     * El nuevo tipo debe ser INVERSION SOCIAL o SALUD
+     */
+    public void modificarTipo(String tipo){
+        if(tipo.equals(INVERSION_SOCIAL) || tipo.equals(SALUD))
+            this.tipo = tipo;
+    }
 
 }

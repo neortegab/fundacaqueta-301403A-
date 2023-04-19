@@ -6,8 +6,15 @@ package com.user_interface.fundacaqueta.Interfaces.Proyecto;
 
 //Imports logic
 import com.logic.fundacaqueta.Fundacaqueta;
-import javax.swing.JOptionPane;
 
+//Imports java
+import javax.swing.JOptionPane;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+
+//Imports interface
+import com.user_interface.fundacaqueta.InterfazAdmin;
 /**
  *
  * @author nebel
@@ -15,13 +22,16 @@ import javax.swing.JOptionPane;
 public class EditarProyecto extends javax.swing.JFrame {
     
     private Fundacaqueta fundacaqueta;
+    
+    private InterfazAdmin parentAdmin;
 
     /**
      * Creates new form EditarProyecto
      */
-    public EditarProyecto(Fundacaqueta fundacaqueta) {
+    public EditarProyecto(Fundacaqueta fundacaqueta, InterfazAdmin parent) {
         initComponents();
         this.fundacaqueta = fundacaqueta;
+        this.parentAdmin = parent;
     }
 
     /**
@@ -44,6 +54,10 @@ public class EditarProyecto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         ftxtId = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        ftxtFechaFin = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +74,11 @@ public class EditarProyecto extends javax.swing.JFrame {
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Salud", "Inversion social" }));
 
         bttnConfirmar.setText("Confirmar");
+        bttnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnConfirmarActionPerformed(evt);
+            }
+        });
 
         BttnCancelar.setText("Cancelar");
         BttnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +96,19 @@ public class EditarProyecto extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Fecha fin:");
+
+        ftxtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Para modificar la fecha de inicio, debe modificar la fecha de inicio del primer contrato del proyecto.");
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setEnabled(false);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,19 +122,22 @@ public class EditarProyecto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtLugarEjecucion, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ftxtFechaFin)
+                            .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(bttnConfirmar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(62, 62, 62)
                                 .addComponent(BttnCancelar))
-                            .addComponent(txtLugarEjecucion, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ftxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,11 +159,17 @@ public class EditarProyecto extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ftxtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bttnConfirmar)
                     .addComponent(BttnCancelar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,6 +185,44 @@ public class EditarProyecto extends javax.swing.JFrame {
         revisarValorId();
         
     }//GEN-LAST:event_ftxtIdPropertyChange
+
+    private void bttnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnConfirmarActionPerformed
+        // TODO add your handling code here:
+        int id = Math.toIntExact((Long) ftxtId.getValue());
+        id--;
+        String nombre = txtNombre.getText();
+        String lugarEjecucion = txtLugarEjecucion.getText();
+        String tipo = cmbTipo.getSelectedItem().toString();
+        String fechaFin = ftxtFechaFin.getText();
+        
+        if(!ftxtFechaFin.getText().equals(null))
+            fechaFin = ftxtFechaFin.getText();
+        
+        String dialogo = "¿Está seguro que desea editar este proyecto?\n" 
+                +"Nombre: " + nombre + "\n" 
+                +"Lugar ejecucion: " + lugarEjecucion + "\n"
+                +"Tipo: " + tipo + "\n"
+                +"Fecha fin: " + fechaFin + "\n";
+        
+        int respuesta = JOptionPane.showConfirmDialog(this, dialogo, "Confirmar", JOptionPane.YES_NO_OPTION);
+        
+        if(respuesta == JOptionPane.YES_OPTION){
+            fundacaqueta.obtenerProyectos().get(id).modificarNombre(nombre);
+            fundacaqueta.obtenerProyectos().get(id).modificarLugarEjecucion(lugarEjecucion);
+            fundacaqueta.obtenerProyectos().get(id).modificarTipo(tipo);
+                   
+            if(!fechaFin.equals("")){
+                String[] detallesFechaFin = fechaFin.split("/");
+                int diasFechaFin = Integer.parseInt(detallesFechaFin[0]);
+                int mesFechaFin = Integer.parseInt(detallesFechaFin[1]);
+                int añoFechaFin = Integer.parseInt(detallesFechaFin[2]);
+                fundacaqueta.obtenerProyectos().get(id).modificarFechaFin(LocalDate.of(añoFechaFin, mesFechaFin, diasFechaFin));
+            }
+            parentAdmin.updateProjects();
+            JOptionPane.showMessageDialog(this, "Proyecto modificado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
+    }//GEN-LAST:event_bttnConfirmarActionPerformed
 
     private void revisarValorId(){
         if(ftxtId.getValue() != null){
@@ -169,17 +248,24 @@ public class EditarProyecto extends javax.swing.JFrame {
             cmbTipo.setSelectedIndex(1);
         else
             cmbTipo.setSelectedIndex(0);
+        
+        if(fundacaqueta.obtenerProyectos().get(id).obtenerFechaFin()!=null)
+            ftxtFechaFin.setText(fundacaqueta.obtenerProyectos().get(id).obtenerFechaFin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BttnCancelar;
     private javax.swing.JButton bttnConfirmar;
     private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JFormattedTextField ftxtFechaFin;
     private javax.swing.JFormattedTextField ftxtId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtLugarEjecucion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

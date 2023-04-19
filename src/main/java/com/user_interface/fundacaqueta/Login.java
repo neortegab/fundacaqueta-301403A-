@@ -204,6 +204,7 @@ public class Login extends javax.swing.JFrame {
             if (user.equals(usuarioAdministrador) && password.equals(contraseña)) {
                 InterfazAdmin adminView = new InterfazAdmin(fundacaqueta);
                 adminView.setVisible(true);
+                this.dispose();
                 return true;
             }
         }

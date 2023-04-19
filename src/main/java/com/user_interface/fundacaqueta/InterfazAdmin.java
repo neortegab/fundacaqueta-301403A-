@@ -147,9 +147,9 @@ public class InterfazAdmin extends javax.swing.JFrame {
         TxtLugarEjecucion.setText(proyectoSeleccionado.obtenerLugarEjecucion());
         TxtTipo.setText(proyectoSeleccionado.obtenerTipo());
         TxtFechaInicio.setText(proyectoSeleccionado.obtenerFechaInicio().toString());
+        TxtFechaFin.setText("No ha finalizado");
         if(proyectoSeleccionado.obtenerFechaFin() != null)
             TxtFechaFin.setText(proyectoSeleccionado.obtenerFechaFin().toString());
-        TxtFechaFin.setText("No ha finalizado");
     }
     
     private void showDetailsProfessional(){
@@ -796,7 +796,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
     private void MenuBttnEditarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnEditarProyectoActionPerformed
         // TODO add your handling code here:
-        EditarProyecto editar = new EditarProyecto(fundacaqueta);
+        EditarProyecto editar = new EditarProyecto(fundacaqueta, this);
         editar.setVisible(true);
     }//GEN-LAST:event_MenuBttnEditarProyectoActionPerformed
 
