@@ -774,7 +774,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
     private void MenuBttnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarProyectoActionPerformed
         // TODO add your handling code here:
-        AgregarProyecto addProject = new AgregarProyecto(fundacaqueta, this, null);
+        AgregarProyecto addProject = new AgregarProyecto(fundacaqueta, this);
         addProject.setVisible(true);
         
     }//GEN-LAST:event_MenuBttnAgregarProyectoActionPerformed

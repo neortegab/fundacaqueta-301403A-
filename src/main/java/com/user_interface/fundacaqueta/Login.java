@@ -208,16 +208,16 @@ public class Login extends javax.swing.JFrame {
             }
         }
 
-        for (int i = 0; i < auxs.size(); i++) {
-            String usuarioAux = auxs.get(i).obtenerNombreUsuario();
-            String contraseña = auxs.get(i).obtenerContraseña();
-
-            if (user.equals(usuarioAux) && password.equals(contraseña)) {
-                InterfazUsuarioAuxiliar aux = new InterfazUsuarioAuxiliar(fundacaqueta);
-                aux.setVisible(true);
-                return true;
-            }
-        }
+//        for (int i = 0; i < auxs.size(); i++) {
+//            String usuarioAux = auxs.get(i).obtenerNombreUsuario();
+//            String contraseña = auxs.get(i).obtenerContraseña();
+//
+//            if (user.equals(usuarioAux) && password.equals(contraseña)) {
+//                InterfazUsuarioAuxiliar aux = new InterfazUsuarioAuxiliar(fundacaqueta);
+//                aux.setVisible(true);
+//                return true;
+//            }
+//        }
 
         for (int i = 0; i < auxs.size(); i++) {
             String usuarioProf = profs.get(i).obtenerNombreUsuario();

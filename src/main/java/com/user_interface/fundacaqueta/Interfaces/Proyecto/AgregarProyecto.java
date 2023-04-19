@@ -23,21 +23,21 @@ public class AgregarProyecto extends javax.swing.JFrame {
 
     private InterfazAdmin parentAdmin;
     
-    private InterfazUsuarioAuxiliar parentAuxiliar;
+//    private InterfazUsuarioAuxiliar parentAuxiliar;
     
     private Fundacaqueta fundacaqueta;
     /**
      * Creates new form AgregarProyecto
      */
-    public AgregarProyecto(Fundacaqueta fundacaqueta, InterfazAdmin parentAdmin, InterfazUsuarioAuxiliar parentAuxiliar) {
+    public AgregarProyecto(Fundacaqueta fundacaqueta, InterfazAdmin parentAdmin) {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.fundacaqueta = fundacaqueta;
         if(parentAdmin != null)
             this.parentAdmin = parentAdmin;
         
-        if(parentAuxiliar != null)
-            this.parentAdmin = parentAdmin;
+//        if(parentAuxiliar != null)
+//            this.parentAuxiliar = parentAuxiliar;
     }
     
     /**
