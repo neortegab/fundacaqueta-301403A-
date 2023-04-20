@@ -50,7 +50,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     public void updateProjects(){
-        showProjects();
+        if(fundacaqueta.obtenerProyectos().size()>0)
+            showProjects();
+        else{
+            DefaultListModel nombresProyectos = new DefaultListModel();
+            ListProyectos.setModel(nombresProyectos);
+        }
     }
     
     private void showProfessionals(){
@@ -658,6 +663,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuProyectos.add(MenuBttnEditarProyecto);
 
         MenuBttnEliminarProyecto.setText("Eliminar");
+        MenuBttnEliminarProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnEliminarProyectoActionPerformed(evt);
+            }
+        });
         MenuProyectos.add(MenuBttnEliminarProyecto);
 
         MenuBttnFiltrarProyectos.setText("Filtrar");
@@ -809,6 +819,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_menuItemSalirActionPerformed
+
+    private void MenuBttnEliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnEliminarProyectoActionPerformed
+        // TODO add your handling code here:
+        EliminarProyecto eliminar = new EliminarProyecto(fundacaqueta, this);
+        eliminar.setVisible(true);
+    }//GEN-LAST:event_MenuBttnEliminarProyectoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;

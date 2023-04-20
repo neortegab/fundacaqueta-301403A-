@@ -10,7 +10,6 @@ import com.logic.fundacaqueta.Fundacaqueta;
 //Imports java
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
 //Imports interface
