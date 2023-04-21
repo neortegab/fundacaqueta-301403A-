@@ -54,7 +54,7 @@ public class FiltrarProyecto extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Filtrar Proyecto");
+        jLabel1.setText("Filtrar Proyectos");
 
         bttnConfirmar.setText("Confirmar");
         bttnConfirmar.addActionListener(new java.awt.event.ActionListener() {
