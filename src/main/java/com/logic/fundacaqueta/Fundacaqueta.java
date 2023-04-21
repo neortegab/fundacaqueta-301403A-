@@ -138,6 +138,18 @@ public class Fundacaqueta {
         return proyectos;
     }
     
+    public Proyecto obtenerProyectoPorNombre(String nombre){
+        Proyecto proyectoBuscado = null;
+        if(!proyectos.isEmpty()){
+            for(Proyecto proyecto : proyectos){
+                if(proyecto.obtenerNombre().equals(nombre))
+                    proyectoBuscado = proyecto;
+            }
+            
+        }
+        return proyectoBuscado;
+    }
+    
     /**
      * Agrega un proyecto a la lista de proyectos
      * @param proyecto - nuevo proyecto a agregar

@@ -19,6 +19,8 @@ import com.logic.fundacaqueta.ContratoColaboracion;
 
 //Interface imports
 import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 /**
  *
  * @author nebel
@@ -185,6 +187,54 @@ public class InterfazAdmin extends javax.swing.JFrame {
         TxtValorContrato.setText(Double.toString(contratoSeleccionado.obtenerValor()));
         TxtFechaInicioContrato.setText(contratoSeleccionado.obtenerFechaInicio().toString());
         TxtDuracion.setText(contratoSeleccionado.obtenerDuracion());
+    }
+    
+    public void filtrarProyectosPorFechas(String fechaInicio, String fechaFin){
+        LocalDate fechaInicioProyectos = formatearFecha(fechaInicio);
+        LocalDate fechaFinProyectos = formatearFecha(fechaFin);
+        DefaultListModel proyectosPorFecha = new DefaultListModel();
+        
+        if(fechaInicioProyectos!=null){    
+            ListModel<String> proyectosEnVista = ListProyectos.getModel();
+            for(int i = 0; i < proyectosEnVista.getSize(); i++){
+                Proyecto proyectoBuscado = fundacaqueta.obtenerProyectoPorNombre(proyectosEnVista.getElementAt(i));
+                if(proyectoBuscado!=null){
+                    boolean fechaInicioEstaDentroRango = proyectoBuscado.obtenerFechaInicio().isAfter(fechaInicioProyectos)
+                            || proyectoBuscado.obtenerFechaInicio().isEqual(fechaInicioProyectos);
+                    
+                    boolean fechaFinEstaDentroRango = true;
+                    
+                    if(fechaFinProyectos!=null)
+                        fechaFinEstaDentroRango = proyectoBuscado.obtenerFechaFin()==null 
+                            || proyectoBuscado.obtenerFechaFin().isBefore(fechaFinProyectos)
+                            || proyectoBuscado.obtenerFechaFin().isEqual(fechaFinProyectos);
+                    
+                    if(fechaInicioEstaDentroRango && fechaFinEstaDentroRango)
+                        proyectosPorFecha.add(i, proyectoBuscado.obtenerNombre());
+                }
+            }
+        }
+        ListProyectos.setModel(proyectosPorFecha);
+    }
+    
+    private LocalDate formatearFecha(String fecha){
+        if(fecha.equals(""))
+            return null;
+        
+        String[] divisionFecha = fecha.split("/");
+        int dias = Integer.parseInt(divisionFecha[0]);
+        int meses = Integer.parseInt(divisionFecha[1]);
+        int años = Integer.parseInt(divisionFecha[2]);
+        
+        boolean fechaValida = dias<=31 && meses <= 12 && años>=0;
+        
+        if(fechaValida)
+            return LocalDate.of(años, meses, dias);
+        else{
+            String error = "La fecha indicada " + dias + "/" + meses + "/" + años + "es invalida";
+            JOptionPane.showMessageDialog(this, error, "Fecha Invalida", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
     }
 
     /**
@@ -671,6 +721,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuProyectos.add(MenuBttnEliminarProyecto);
 
         MenuBttnFiltrarProyectos.setText("Filtrar");
+        MenuBttnFiltrarProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnFiltrarProyectosActionPerformed(evt);
+            }
+        });
         MenuProyectos.add(MenuBttnFiltrarProyectos);
 
         BarOptions.add(MenuProyectos);
@@ -825,6 +880,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
         EliminarProyecto eliminar = new EliminarProyecto(fundacaqueta, this);
         eliminar.setVisible(true);
     }//GEN-LAST:event_MenuBttnEliminarProyectoActionPerformed
+
+    private void MenuBttnFiltrarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnFiltrarProyectosActionPerformed
+        // TODO add your handling code here:
+        FiltrarProyecto filtros = new FiltrarProyecto(this);
+        filtros.setVisible(true);
+    }//GEN-LAST:event_MenuBttnFiltrarProyectosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
