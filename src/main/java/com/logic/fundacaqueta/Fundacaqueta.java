@@ -149,6 +149,46 @@ public class Fundacaqueta {
         }
         return proyectoBuscado;
     }
+    /**
+     * Metodo que filtra los proyectos existentes segun un valor y una condicion
+     * @param valor - valor que filtrara los proyectos
+     * @param condicion - "menor que" "mayor que" o "igual" es la condicion con la que se compara el valor del proyecto con el valor por parametro
+     * @return lista de proyectos filtradas o una lista vacia si no hay ninguno
+     */
+    public ArrayList<Proyecto> obtenerProyectoPorValor(double valor, String condicion){
+        ArrayList<Proyecto> proyectosFiltrados = new ArrayList<Proyecto>();
+        if(condicion.equals("menor que")){
+            for(Proyecto proyecto : proyectos)
+                if(proyecto.obtenerValor() < valor)
+                    proyectosFiltrados.add(proyecto);
+        }
+        else if(condicion.equals("mayor que")){
+            for(Proyecto proyecto : proyectos)
+                if(proyecto.obtenerValor() > valor)
+                    proyectosFiltrados.add(proyecto);
+        }
+        else{
+            for(Proyecto proyecto : proyectos)
+                if(proyecto.obtenerValor() == valor)
+                    proyectosFiltrados.add(proyecto);
+        }
+        return proyectosFiltrados;
+    }
+    
+    /**
+     * Metodo que filtra los proyectos cuyo valor este dentro de un rango de valores
+     * @param valorMin - valor minimo segun el rango buscado
+     * @param valorMax - valor maximo segun el rango buscado
+     * @return una lista de proyectos en la cual el valor de cada proyecto esta dentro del valor especificado.
+     */
+    public ArrayList<Proyecto> obtenerProyectoPorRangoDeValores(double valorMin, double valorMax){
+        ArrayList<Proyecto> proyectosFiltrados = new ArrayList<Proyecto>();
+        for(Proyecto proyecto : proyectos){
+            if(proyecto.obtenerValor() >= valorMin && proyecto.obtenerValor() <= valorMax)
+                proyectosFiltrados.add(proyecto);
+        }
+        return proyectosFiltrados;
+    }
     
     /**
      * Agrega un proyecto a la lista de proyectos

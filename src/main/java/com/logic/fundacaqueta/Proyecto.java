@@ -35,6 +35,11 @@ public class Proyecto {
      * Tipo de proyecto (Inversion social o salud).
      */
     private String tipo;
+    
+    /**
+     * Valor del proyecto, sumando valores de los contratos de colaboracion o de sus profesionales
+     */
+    private double valor;
 
     /**
      * Lista de los contratos del proyecto
@@ -67,6 +72,7 @@ public class Proyecto {
         this.nombre = nombre;
         this.lugarEjecucion = lugarEjecucion;
         this.fechaInicio = LocalDate.now();
+        this.valor = 0;
         this.contratos = new ArrayList<ContratoColaboracion>();
         this.profesionales = new ArrayList<Profesional>();
         this.actividades = new ArrayList<Actividad>();
@@ -159,6 +165,17 @@ public class Proyecto {
      */
     public void modificarLugarEjecucion(String lugarEjecucion) {
         this.lugarEjecucion = lugarEjecucion;
+    }
+    
+    public double obtenerValor(){
+        for(Profesional profesional : profesionales){
+            valor+=profesional.obtenerContrato().obtenerValor();
+        }
+        
+        for(ContratoColaboracion contrato : contratos){
+            valor+=contrato.obtenerValor();
+        }
+        return valor;
     }
 
     /**

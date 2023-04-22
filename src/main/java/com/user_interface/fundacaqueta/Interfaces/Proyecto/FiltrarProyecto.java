@@ -39,6 +39,7 @@ public class FiltrarProyecto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         bttnConfirmar = new javax.swing.JButton();
         bttnCancelar = new javax.swing.JButton();
@@ -49,6 +50,18 @@ public class FiltrarProyecto extends javax.swing.JFrame {
         txtFechaInicio = new javax.swing.JTextField();
         txtFechaFin = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        txtValorCondicionado = new javax.swing.JTextField();
+        cbCondicionValor = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtValorMinimo = new javax.swing.JTextField();
+        txtValorMaximo = new javax.swing.JTextField();
+
+        jLabel6.setText("jLabel6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,6 +128,73 @@ public class FiltrarProyecto extends javax.swing.JFrame {
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel7.setText("FIltrar por valor");
+
+        cbCondicionValor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Igual", "Menor que", "Mayor que" }));
+
+        jLabel8.setText("Rango de valores");
+
+        jLabel9.setText("Mínimo");
+
+        jLabel10.setText("Máximo");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10))
+                                .addGap(57, 57, 57)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtValorMinimo)
+                                    .addComponent(txtValorMaximo)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cbCondicionValor, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtValorCondicionado)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbCondicionValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValorCondicionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addGap(6, 6, 6))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtValorMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtValorMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,6 +210,7 @@ public class FiltrarProyecto extends javax.swing.JFrame {
                         .addGap(103, 103, 103))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
@@ -141,6 +222,8 @@ public class FiltrarProyecto extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bttnCancelar)
@@ -158,20 +241,64 @@ public class FiltrarProyecto extends javax.swing.JFrame {
 
     private void bttnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnConfirmarActionPerformed
         // TODO add your handling code here:
-        if(filtraProyectos() && confirmarOperacion()){
-            if(!formatoFechaEsValido())
-                notificarFormatoInvalido();
-            else{
-                parentAdmin.filtrarProyectosPorFechas(txtFechaInicio.getText(), txtFechaFin.getText());
-                JOptionPane.showMessageDialog(this, 
+        if(confirmarOperacion()){
+            if(filtraProyectosPorFecha()){
+                if(!formatoFechaEsValido())
+                    notificarFormatoInvalido("El formato de fecha no es valido, recuerde que debe ser dd/mm/aaaa", "Fecha Invalida");
+                else{
+                    parentAdmin.filtrarProyectosPorFechas(txtFechaInicio.getText(), txtFechaFin.getText());
+                    JOptionPane.showMessageDialog(this, 
                     "Se aplicó el filtro de fecha",
                     "Filtro aplicado",
                     JOptionPane.INFORMATION_MESSAGE);
+                }
             }
+            if(filtraPorValor()){
+                if(!filtroPorValorEsValido())
+                    notificarFormatoInvalido("Solo puede filtrar por rango de valores o por un solo valor", "Valor invalido");
+                else{
+                    if(filtraPorUnSoloValor()){
+                        parentAdmin.filtrarProyectosSegunValor(Double.parseDouble(txtValorCondicionado.getText()), cbCondicionValor.getSelectedItem().toString().toLowerCase());
+                        JOptionPane.showMessageDialog(this, 
+                                  "Se aplicó el filtro de valor",
+                                   "Filtro aplicado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        parentAdmin.filtrarProyectosRangoDeValores(Double.parseDouble(txtValorMinimo.getText()), Double.parseDouble(txtValorMaximo.getText()));
+                        JOptionPane.showMessageDialog(this, 
+                                  "Se aplicó el filtro de valor",
+                                   "Filtro aplicado",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+            this.dispose();
         }
     }//GEN-LAST:event_bttnConfirmarActionPerformed
 
-    private boolean filtraProyectos(){
+    private boolean filtraPorValor(){
+        return filtraPorUnSoloValor() || filtraPorRango();
+    }
+    
+    private boolean filtraPorUnSoloValor(){
+        return !txtValorCondicionado.getText().equals("");
+    }
+    
+    private boolean filtraPorRango(){
+        return !txtValorMaximo.getText().equals("") 
+                && !txtValorMinimo.getText().equals("");
+    }
+    
+    private boolean filtroPorValorEsValido(){
+        if(!txtValorCondicionado.getText().equals("") 
+                && (!txtValorMaximo.getText().equals("") 
+                    || !txtValorMinimo.getText().equals("")))
+            return false;
+        return true;
+    }
+    
+    private boolean filtraProyectosPorFecha(){
         return !txtFechaInicio.getText().equals("");
     }
     
@@ -214,10 +341,10 @@ public class FiltrarProyecto extends javax.swing.JFrame {
         return estaVacio || contieneFecha;
     }
     
-    private void notificarFormatoInvalido(){
+    private void notificarFormatoInvalido(String message, String title){
         JOptionPane.showMessageDialog(this,
-                "El formato de fecha no es valido, recuerde que debe ser dd/mm/aaaa",
-                "Fecha invalida",
+                message,
+                title,
                 JOptionPane.ERROR_MESSAGE);
     }
     
@@ -235,13 +362,24 @@ public class FiltrarProyecto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnCancelar;
     private javax.swing.JButton bttnConfirmar;
+    private javax.swing.JComboBox<String> cbCondicionValor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtFechaFin;
     private javax.swing.JTextField txtFechaInicio;
+    private javax.swing.JTextField txtValorCondicionado;
+    private javax.swing.JTextField txtValorMaximo;
+    private javax.swing.JTextField txtValorMinimo;
     // End of variables declaration//GEN-END:variables
 }

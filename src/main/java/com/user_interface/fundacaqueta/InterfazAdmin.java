@@ -236,6 +236,27 @@ public class InterfazAdmin extends javax.swing.JFrame {
             return null;
         }
     }
+    
+    public void filtrarProyectosSegunValor(double valor, String condicion){
+        DefaultListModel<String> nuevosProyectosEnPantalla = new DefaultListModel<String>();
+        ArrayList proyectosPorValor = fundacaqueta.obtenerProyectoPorValor(valor, condicion);
+        for(int i = 0; i < ListProyectos.getModel().getSize() && proyectosPorValor.size()>0; i++){
+            Proyecto proyectoActual = fundacaqueta.obtenerProyectoPorNombre(ListProyectos.getModel().getElementAt(i));
+            if(proyectosPorValor.contains(proyectoActual))
+                nuevosProyectosEnPantalla.addElement(proyectoActual.obtenerNombre());
+        }
+        ListProyectos.setModel(nuevosProyectosEnPantalla);
+    }
+    
+    public void filtrarProyectosRangoDeValores(double valorMin, double valorMax){
+        DefaultListModel<String> nuevosProyectosEnPantalla = new DefaultListModel<String>();
+        ArrayList proyectosEnRango = fundacaqueta.obtenerProyectoPorRangoDeValores(valorMin, valorMax);
+        for(int i = 0; i < ListProyectos.getModel().getSize(); i++){
+            if(proyectosEnRango.contains(fundacaqueta.obtenerProyectoPorNombre(ListProyectos.getModel().getElementAt(i))))
+                nuevosProyectosEnPantalla.addElement(ListProyectos.getModel().getElementAt(i));
+        }
+        ListProyectos.setModel(nuevosProyectosEnPantalla);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
