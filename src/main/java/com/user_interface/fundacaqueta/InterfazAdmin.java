@@ -19,6 +19,7 @@ import com.logic.fundacaqueta.ContratoColaboracion;
 
 //Interface imports
 import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
+import com.user_interface.fundacaqueta.Interfaces.Profesional.*;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 /**
@@ -256,6 +257,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
                 nuevosProyectosEnPantalla.addElement(ListProyectos.getModel().getElementAt(i));
         }
         ListProyectos.setModel(nuevosProyectosEnPantalla);
+    }
+    
+    public void agregarProfesional(String nombreUsuario, String contraseña, String nombres, String correo, int documento, LocalDate fechaNacimiento, String perfil, String cargo){
+        proyectoSeleccionado.agregarProfesional(new Profesional(nombreUsuario, contraseña, nombres, correo, documento, fechaNacimiento, perfil, cargo));
+        showProfessionals();
     }
 
     /**
@@ -754,6 +760,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuProfesionales.setText("Profesionales");
 
         MenuBttnAgregarProfesional.setText("Agregar");
+        MenuBttnAgregarProfesional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnAgregarProfesionalActionPerformed(evt);
+            }
+        });
         MenuProfesionales.add(MenuBttnAgregarProfesional);
 
         MenuBttnEditarProfesional.setText("Editar");
@@ -907,6 +918,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
         FiltrarProyecto filtros = new FiltrarProyecto(this);
         filtros.setVisible(true);
     }//GEN-LAST:event_MenuBttnFiltrarProyectosActionPerformed
+
+    private void MenuBttnAgregarProfesionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarProfesionalActionPerformed
+        // TODO add your handling code here:
+        AgregarProfesional agregar = new AgregarProfesional(this);
+        agregar.setVisible(true);
+    }//GEN-LAST:event_MenuBttnAgregarProfesionalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
