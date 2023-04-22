@@ -42,6 +42,10 @@ public class InterfazAdmin extends javax.swing.JFrame {
         showProjects();
     }
     
+    public Profesional obtenerProfesionalSeleccionado(){
+        return profesionalSeleccionado;
+    }
+    
     private void showProjects(){
         ArrayList<Proyecto> proyectos = fundacaqueta.obtenerProyectos();
         DefaultListModel nombresProyectos = new DefaultListModel();
@@ -261,6 +265,18 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     public void agregarProfesional(String nombreUsuario, String contraseña, String nombres, String correo, int documento, LocalDate fechaNacimiento, String perfil, String cargo){
         proyectoSeleccionado.agregarProfesional(new Profesional(nombreUsuario, contraseña, nombres, correo, documento, fechaNacimiento, perfil, cargo));
+        showProfessionals();
+    }
+    
+    public void editarProfesional(String nombreUsuario, String contraseña, String nombres, String correo, int documento, LocalDate fechaNacimiento, String perfil, String cargo){
+        profesionalSeleccionado.modificarNombreUsuario(nombreUsuario);
+        profesionalSeleccionado.modificarContraseña(contraseña);
+        profesionalSeleccionado.modificarNombre(nombres);
+        profesionalSeleccionado.modificarCorreo(correo);
+        profesionalSeleccionado.modificarDocumento(documento);
+        profesionalSeleccionado.modificarFechaNacimiento(fechaNacimiento);
+        profesionalSeleccionado.modificarPerfil(perfil);
+        profesionalSeleccionado.modificarCargo(cargo);
         showProfessionals();
     }
 
@@ -768,6 +784,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuProfesionales.add(MenuBttnAgregarProfesional);
 
         MenuBttnEditarProfesional.setText("Editar");
+        MenuBttnEditarProfesional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnEditarProfesionalActionPerformed(evt);
+            }
+        });
         MenuProfesionales.add(MenuBttnEditarProfesional);
 
         Eliminar.setText("Eliminar");
@@ -924,6 +945,16 @@ public class InterfazAdmin extends javax.swing.JFrame {
         AgregarProfesional agregar = new AgregarProfesional(this);
         agregar.setVisible(true);
     }//GEN-LAST:event_MenuBttnAgregarProfesionalActionPerformed
+
+    private void MenuBttnEditarProfesionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnEditarProfesionalActionPerformed
+        // TODO add your handling code here:
+        if(profesionalSeleccionado==null)
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un profesional del proyecto para poder editar", "Error", JOptionPane.ERROR_MESSAGE);
+        else{
+            EditarProfesional editar = new EditarProfesional(this);
+            editar.setVisible(true);
+        }
+    }//GEN-LAST:event_MenuBttnEditarProfesionalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
