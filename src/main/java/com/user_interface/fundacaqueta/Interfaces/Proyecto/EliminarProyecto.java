@@ -137,7 +137,7 @@ public class EliminarProyecto extends javax.swing.JFrame {
             return false;
         }
         else if(id > fundacaqueta.obtenerProyectos().size()-1){
-            JOptionPane.showMessageDialog(this, "El id no existe", "Id invalido", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El id no existe dentro de la lista", "Id invalido", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

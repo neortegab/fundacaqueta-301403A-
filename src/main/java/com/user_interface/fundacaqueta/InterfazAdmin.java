@@ -33,6 +33,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private Proyecto proyectoSeleccionado;
     
     private Profesional profesionalSeleccionado;
+    
+    public final static int ELIMINAR_PROFESIONAL = 1;
     /**
      * Creates new form InterfazAdmin
      */
@@ -66,30 +68,34 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showProfessionals(){
-        ArrayList<Profesional> profesionales = proyectoSeleccionado.obtenerProfesionales();
-        DefaultListModel nombreProfesionales = new DefaultListModel();
-        for(Profesional profesional : profesionales){
-            nombreProfesionales.addElement(profesional.obtenerNombre());
+        if(proyectoSeleccionado!=null){
+            ArrayList<Profesional> profesionales = proyectoSeleccionado.obtenerProfesionales();
+            DefaultListModel nombreProfesionales = new DefaultListModel();
+            for(Profesional profesional : profesionales){
+                nombreProfesionales.addElement(profesional.obtenerNombre());
+            }
+            ListProfesionales.setModel(nombreProfesionales);
         }
-        ListProfesionales.setModel(nombreProfesionales);
     }
     
     private Proyecto obtainSelectedProject(){
         String nombreProyectoSeleccionado = ListProyectos.getSelectedValue();
-        for(Proyecto proyecto : fundacaqueta.obtenerProyectos()){
-            if(proyecto.obtenerNombre().equals(nombreProyectoSeleccionado))
-                proyectoSeleccionado = proyecto;
+        if(nombreProyectoSeleccionado != null){
+            for(Proyecto proyecto : fundacaqueta.obtenerProyectos()){
+                if(proyecto.obtenerNombre().equals(nombreProyectoSeleccionado))
+                    return proyectoSeleccionado = proyecto;
+            }
         }
         return proyectoSeleccionado;
     }
     
     private Profesional obtainSelectedProfessional(){
         String nombreProfesionalSeleccionado = ListProfesionales.getSelectedValue();
-        
-        for(Profesional profesional : obtainSelectedProject().obtenerProfesionales()){
-            if(profesional.obtenerNombre().equals(nombreProfesionalSeleccionado))
-                profesionalSeleccionado = profesional;
-        }
+        if(nombreProfesionalSeleccionado != null)
+            for(Profesional profesional : obtainSelectedProject().obtenerProfesionales()){
+                if(profesional.obtenerNombre().equals(nombreProfesionalSeleccionado))
+                    profesionalSeleccionado = profesional;
+            }
         return profesionalSeleccionado;
     }
     
@@ -107,13 +113,13 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     private Actividad obtainSelectedProfessionalActivity(){
         Actividad actividadSeleccionada = null;
-        
-        String nombreActividadSeleccionada = ListActividadesProf.getSelectedValue();
-        for(Actividad actividad : profesionalSeleccionado.obtenerActividades()){
-            if(actividad.obtenerNombre().equals(nombreActividadSeleccionada))
-                actividadSeleccionada = actividad;
+        if(profesionalSeleccionado != null){
+            String nombreActividadSeleccionada = ListActividadesProf.getSelectedValue();
+            for(Actividad actividad : profesionalSeleccionado.obtenerActividades()){
+                if(actividad.obtenerNombre().equals(nombreActividadSeleccionada))
+                    actividadSeleccionada = actividad;
+            }
         }
-        
         return actividadSeleccionada;
     }
     
@@ -132,58 +138,96 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private void showProfessionalActivities(){
         profesionalSeleccionado = obtainSelectedProfessional();
         DefaultListModel nombreActividades = new DefaultListModel();
-        for(Actividad actividad : profesionalSeleccionado.obtenerActividades()){
-            nombreActividades.addElement(actividad.obtenerNombre());
+        if(profesionalSeleccionado != null){
+            for(Actividad actividad : profesionalSeleccionado.obtenerActividades()){
+                nombreActividades.addElement(actividad.obtenerNombre());
+            }
         }
-        ListActividadesProf.setModel(nombreActividades);
+        ListActividadesProf.setModel(nombreActividades);   
     }
     
     private void showProjectActivities(){
         DefaultListModel nombreActividades = new DefaultListModel();
-        for(Actividad actividad : proyectoSeleccionado.obtenerActividades()){
-            nombreActividades.addElement(actividad.obtenerNombre());
+        proyectoSeleccionado = obtainSelectedProject();
+        if(proyectoSeleccionado != null){
+            ArrayList<Actividad> actividadesProyecto = proyectoSeleccionado.obtenerActividades();
+            if(!actividadesProyecto.isEmpty()){
+                System.out.println("Size actividades: " + actividadesProyecto.size());
+                for(int i = 0; i < actividadesProyecto.size(); i++){
+                    nombreActividades.addElement(actividadesProyecto.get(i).obtenerNombre());
+                }
+            }
         }
         ListActividadesProy.setModel(nombreActividades);
     }
     
     private void showProjectContracts(){
         DefaultListModel objetivosContratos = new DefaultListModel();
-        for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
-            objetivosContratos.addElement(contrato.obtenerObjetivo());
+        if(proyectoSeleccionado!=null){
+            for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
+                objetivosContratos.addElement(contrato.obtenerObjetivo());
+            }
         }
         ListContratosProy.setModel(objetivosContratos);
     }
     
     private void showDetailsProject(){
         proyectoSeleccionado = obtainSelectedProject();
-        TxtLugarEjecucion.setText(proyectoSeleccionado.obtenerLugarEjecucion());
-        TxtTipo.setText(proyectoSeleccionado.obtenerTipo());
-        TxtFechaInicio.setText(proyectoSeleccionado.obtenerFechaInicio().toString());
-        TxtFechaFin.setText("No ha finalizado");
-        if(proyectoSeleccionado.obtenerFechaFin() != null)
-            TxtFechaFin.setText(proyectoSeleccionado.obtenerFechaFin().toString());
+        if(proyectoSeleccionado != null){
+            TxtLugarEjecucion.setText(proyectoSeleccionado.obtenerLugarEjecucion());
+            TxtTipo.setText(proyectoSeleccionado.obtenerTipo());
+            TxtFechaInicio.setText(proyectoSeleccionado.obtenerFechaInicio().toString());
+            TxtFechaFin.setText("No ha finalizado");
+            if(proyectoSeleccionado.obtenerFechaFin() != null)
+                TxtFechaFin.setText(proyectoSeleccionado.obtenerFechaFin().toString());
+        }
+        else{
+            TxtLugarEjecucion.setText("");
+            TxtTipo.setText("");
+            TxtFechaInicio.setText("");
+            TxtFechaFin.setText("");
+        }
     }
     
     private void showDetailsProfessional(){
         profesionalSeleccionado = obtainSelectedProfessional();
-        TxtCargo.setText(profesionalSeleccionado.obtenerCargo());
-        TxtPerfil.setText(profesionalSeleccionado.obtenerPerfil());
-        String edadProfesional = "";
-        Period edad = Period.between(profesionalSeleccionado.obtenerFechaNacimiento(), LocalDate.now());
-        edadProfesional = edad.getYears() + " años";
-        TxtEdad.setText(edadProfesional);
+        if(profesionalSeleccionado != null){
+            TxtCargo.setText(profesionalSeleccionado.obtenerCargo());
+            TxtPerfil.setText(profesionalSeleccionado.obtenerPerfil());
+            String edadProfesional = "";
+            Period edad = Period.between(profesionalSeleccionado.obtenerFechaNacimiento(), LocalDate.now());
+            edadProfesional = edad.getYears() + " años";
+            TxtEdad.setText(edadProfesional);
+        }
+        else{
+            TxtCargo.setText("");
+            TxtPerfil.setText("");
+            TxtEdad.setText("");
+        }
     }
     
     private void showDetailsProfessionalActivity(){
         Actividad actividadSeleccionada = obtainSelectedProfessionalActivity();
-        TxtDescripcionActividadProf.setText(actividadSeleccionada.obtenerDescripcion());
-        TxtAreaActividadProf.setText(actividadSeleccionada.obtenerArea());
+        if(actividadSeleccionada!=null){
+            TxtDescripcionActividadProf.setText(actividadSeleccionada.obtenerDescripcion());
+            TxtAreaActividadProf.setText(actividadSeleccionada.obtenerArea());
+        } 
+        else {
+            TxtDescripcionActividadProf.setText("");
+            TxtAreaActividadProf.setText("");
+        }
     }
     
     private void showDetailsProjectActivity(){
         Actividad actividadSeleccionada = obtainSelectedActivity();
-        TxtDescripcionActividadesProy.setText(actividadSeleccionada.obtenerDescripcion());
-        TxtAreaActividadesProy.setText(actividadSeleccionada.obtenerArea());
+        if(actividadSeleccionada!=null){
+            TxtDescripcionActividadesProy.setText(actividadSeleccionada.obtenerDescripcion());
+            TxtAreaActividadesProy.setText(actividadSeleccionada.obtenerArea());
+        }
+        else{
+            TxtDescripcionActividadesProy.setText("");
+            TxtAreaActividadesProy.setText("");
+        }
     }
     
     private void showDetailsContract(){
@@ -278,6 +322,17 @@ public class InterfazAdmin extends javax.swing.JFrame {
         profesionalSeleccionado.modificarPerfil(perfil);
         profesionalSeleccionado.modificarCargo(cargo);
         showProfessionals();
+    }
+    
+    public void eliminarProfesional(int action){
+        if(action == ELIMINAR_PROFESIONAL){
+            proyectoSeleccionado.eliminarProfesional(ListProfesionales.getSelectedIndex());
+            profesionalSeleccionado = null;
+            showProfessionals();
+            showProfessionalActivities();
+            showProjectContracts();
+            showProjectActivities();
+        }
     }
 
     /**
@@ -792,6 +847,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuProfesionales.add(MenuBttnEditarProfesional);
 
         Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
         MenuProfesionales.add(Eliminar);
 
         BarOptions.add(MenuProfesionales);
@@ -881,14 +941,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ListProyectosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListProyectosValueChanged
-        // TODO add your handling code here:
-        showDetailsProject();
-        showProfessionals();
-        showProjectActivities();
-        showProjectContracts();
-    }//GEN-LAST:event_ListProyectosValueChanged
-
     private void ListProfesionalesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListProfesionalesValueChanged
         // TODO add your handling code here:
         showDetailsProfessional();
@@ -955,6 +1007,27 @@ public class InterfazAdmin extends javax.swing.JFrame {
             editar.setVisible(true);
         }
     }//GEN-LAST:event_MenuBttnEditarProfesionalActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        // TODO add your handling code here:
+        if(profesionalSeleccionado==null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un profesional del proyecto para poder eliminar", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        else{
+            EliminarProfesional ep = new EliminarProfesional(this);
+            ep.setVisible(true);
+        }
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void ListProyectosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListProyectosValueChanged
+        // TODO add your handling code here:
+        showDetailsProject();
+        showProfessionals();
+        showProjectActivities();
+        showProjectContracts();
+    }//GEN-LAST:event_ListProyectosValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;

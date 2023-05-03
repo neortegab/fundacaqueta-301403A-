@@ -232,6 +232,8 @@ public class Proyecto {
      * @param index - indice del profesional a remover
      */
     public void eliminarProfesional(int index){
+        profesionales.get(index).modificarActividades(null);
+        profesionales.get(index).modificarContrato(null);
         profesionales.remove(index);
     }
 
@@ -249,11 +251,18 @@ public class Proyecto {
      */
     public ArrayList<Actividad> obtenerActividades() {
         if(!profesionales.isEmpty()){
-            for(Profesional profesional : profesionales)
-                for(Actividad actividad : profesional.obtenerActividades())
-                    actividades.add(actividad);
+            for(int i = 0; i < profesionales.size(); i++){
+                Profesional profesionalActual = profesionales.get(i);
+                ArrayList<Actividad> actividadesProfesional = profesionalActual.obtenerActividades();
+                if(!actividadesProfesional.isEmpty()){
+                    for(int j = 0; j < actividadesProfesional.size(); j++){
+                        if(!this.actividades.contains(actividadesProfesional.get(j)))
+                            this.actividades.add(actividadesProfesional.get(j));
+                    }
+                }
+            }
         }
-        return actividades;
+        return this.actividades;
     }
 
     /**
