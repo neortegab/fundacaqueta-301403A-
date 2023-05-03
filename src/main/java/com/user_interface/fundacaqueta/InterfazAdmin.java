@@ -153,7 +153,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
         if(proyectoSeleccionado != null){
             ArrayList<Actividad> actividadesProyecto = proyectoSeleccionado.obtenerActividades();
             if(!actividadesProyecto.isEmpty()){
-                System.out.println("Size actividades: " + actividadesProyecto.size());
                 for(int i = 0; i < actividadesProyecto.size(); i++){
                     nombreActividades.addElement(actividadesProyecto.get(i).obtenerNombre());
                 }
@@ -1040,6 +1039,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
         showProfessionals();
         showProjectActivities();
         showProjectContracts();
+        if(profesionalSeleccionado != null)
+            ListProfesionales.setSelectedValue(profesionalSeleccionado.obtenerNombre(), true);
     }//GEN-LAST:event_ListProyectosValueChanged
 
     private void MenuBttnAgregarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarActividadActionPerformed
