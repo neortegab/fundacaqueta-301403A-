@@ -425,9 +425,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuBttnEditarActividad = new javax.swing.JMenuItem();
         MenuBttnEliminarActividad = new javax.swing.JMenuItem();
         MenuContratos = new javax.swing.JMenu();
+        menuContratoProfesional = new javax.swing.JMenu();
         MenuBttnVerContrato = new javax.swing.JMenuItem();
+        menuEditarContratoProfesional = new javax.swing.JMenuItem();
+        menuContratoProyecto = new javax.swing.JMenu();
         MenuBttnAgregarContrato = new javax.swing.JMenuItem();
-        MenuBttnEditarContrato = new javax.swing.JMenuItem();
+        menuEditarContratoProyecto = new javax.swing.JMenuItem();
         EliminarContrato = new javax.swing.JMenuItem();
         MenuUsuarios = new javax.swing.JMenu();
         MenuBttnAdminUsuarios = new javax.swing.JMenuItem();
@@ -897,17 +900,28 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         MenuContratos.setText("Contratos");
 
+        menuContratoProfesional.setText("Profesional");
+
         MenuBttnVerContrato.setText("Ver contrato");
-        MenuContratos.add(MenuBttnVerContrato);
+        menuContratoProfesional.add(MenuBttnVerContrato);
+
+        menuEditarContratoProfesional.setText("Editar");
+        menuContratoProfesional.add(menuEditarContratoProfesional);
+
+        MenuContratos.add(menuContratoProfesional);
+
+        menuContratoProyecto.setText("Proyecto");
 
         MenuBttnAgregarContrato.setText("Agregar");
-        MenuContratos.add(MenuBttnAgregarContrato);
+        menuContratoProyecto.add(MenuBttnAgregarContrato);
 
-        MenuBttnEditarContrato.setText("Editar");
-        MenuContratos.add(MenuBttnEditarContrato);
+        menuEditarContratoProyecto.setText("Editar");
+        menuContratoProyecto.add(menuEditarContratoProyecto);
 
         EliminarContrato.setText("Eliminar");
-        MenuContratos.add(EliminarContrato);
+        menuContratoProyecto.add(EliminarContrato);
+
+        MenuContratos.add(menuContratoProyecto);
 
         BarOptions.add(MenuContratos);
 
@@ -1104,7 +1118,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuBttnAgregarProfesional;
     private javax.swing.JMenuItem MenuBttnAgregarProyecto;
     private javax.swing.JMenuItem MenuBttnEditarActividad;
-    private javax.swing.JMenuItem MenuBttnEditarContrato;
     private javax.swing.JMenuItem MenuBttnEditarProfesional;
     private javax.swing.JMenuItem MenuBttnEditarProyecto;
     private javax.swing.JMenuItem MenuBttnEliminarActividad;
@@ -1161,6 +1174,10 @@ public class InterfazAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenu menuContratoProfesional;
+    private javax.swing.JMenu menuContratoProyecto;
+    private javax.swing.JMenuItem menuEditarContratoProfesional;
+    private javax.swing.JMenuItem menuEditarContratoProyecto;
     private javax.swing.JMenuItem menuItemSalir;
     // End of variables declaration//GEN-END:variables
 }
