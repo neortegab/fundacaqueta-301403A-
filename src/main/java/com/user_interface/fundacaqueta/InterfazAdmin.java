@@ -351,6 +351,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
             this.showProjectActivities();
         }
     }
+    
+    public void eliminarActividad(){
+        profesionalSeleccionado.removerActividad(obtainSelectedProfessionalActivity());
+        showProfessionalActivities();
+        showProjectActivities();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -894,6 +900,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuActividades.add(MenuBttnEditarActividad);
 
         MenuBttnEliminarActividad.setText("Eliminar");
+        MenuBttnEliminarActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnEliminarActividadActionPerformed(evt);
+            }
+        });
         MenuActividades.add(MenuBttnEliminarActividad);
 
         BarOptions.add(MenuActividades);
@@ -1101,6 +1112,24 @@ public class InterfazAdmin extends javax.swing.JFrame {
             ea.setVisible(true);
         }
     }//GEN-LAST:event_MenuBttnEditarActividadActionPerformed
+
+    private void MenuBttnEliminarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnEliminarActividadActionPerformed
+        // TODO add your handling code here:
+        if(profesionalSeleccionado == null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un profesional del proyecto para poder eliminar una actividad", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        if(obtainSelectedProfessionalActivity()== null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar una actividad de un profesional para poder eliminarla", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        else{
+            EliminarActividad ea = new EliminarActividad(this);
+            ea.setVisible(true);
+        }
+    }//GEN-LAST:event_MenuBttnEliminarActividadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;

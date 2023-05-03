@@ -123,6 +123,11 @@ public class Profesional extends Usuario{
         actividades.add(actividad);
     }
     
+    /**
+     * Metodo que reemplaza una actividad que fue modificada con los nuevos datos
+     * @param viejaActividad - actividad actual en la lista que sera modificada
+     * @param nuevaActividad - nueva actividad con los nuevos datos a reemplazar
+     */
     public void modificarActividad(Actividad viejaActividad, Actividad nuevaActividad){
         boolean encontradaActividad = false;
         for(int i = 0; i < actividades.size() && !encontradaActividad; i++){
@@ -131,6 +136,14 @@ public class Profesional extends Usuario{
                 encontradaActividad = true;
             }
         }
+    }
+    
+    /**
+     * Método que elimina una actividad de la lista de actividades
+     * @param actividad - actividad a eliminar
+     */
+    public void removerActividad(Actividad actividad){
+        actividades.remove(actividad);
     }
     /**
      * Modifica la lista de actividades del profesional con una nueva lista
