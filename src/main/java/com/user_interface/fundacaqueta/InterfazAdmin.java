@@ -20,6 +20,7 @@ import com.logic.fundacaqueta.ContratoColaboracion;
 //Interface imports
 import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
 import com.user_interface.fundacaqueta.Interfaces.Profesional.*;
+import com.user_interface.fundacaqueta.Interfaces.Actividad.*;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 /**
@@ -335,6 +336,13 @@ public class InterfazAdmin extends javax.swing.JFrame {
         }
     }
 
+    public void agregarActividad(String nombre, String descripcion, String area){
+        if(profesionalSeleccionado != null){
+            profesionalSeleccionado.agregarActividad(new Actividad(nombre, descripcion, area));
+            showProfessionalActivities();
+            showProjectActivities();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -859,6 +867,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuActividades.setText("Actividades");
 
         MenuBttnAgregarActividad.setText("Agregar");
+        MenuBttnAgregarActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnAgregarActividadActionPerformed(evt);
+            }
+        });
         MenuActividades.add(MenuBttnAgregarActividad);
 
         MenuBttnEditarActividad.setText("Editar");
@@ -1028,6 +1041,19 @@ public class InterfazAdmin extends javax.swing.JFrame {
         showProjectActivities();
         showProjectContracts();
     }//GEN-LAST:event_ListProyectosValueChanged
+
+    private void MenuBttnAgregarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarActividadActionPerformed
+        // TODO add your handling code here:
+        if(profesionalSeleccionado == null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un profesional del proyecto para poder agregar una actividad", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        else{
+            AgregarActividad aa = new AgregarActividad(this);
+            aa.setVisible(true);
+        }
+    }//GEN-LAST:event_MenuBttnAgregarActividadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
