@@ -250,6 +250,7 @@ public class Proyecto {
      * @return actividades
      */
     public ArrayList<Actividad> obtenerActividades() {
+        this.actividades = new ArrayList<Actividad>();
         if(!profesionales.isEmpty()){
             for(int i = 0; i < profesionales.size(); i++){
                 Profesional profesionalActual = profesionales.get(i);

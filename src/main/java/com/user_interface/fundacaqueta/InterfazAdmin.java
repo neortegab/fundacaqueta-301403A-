@@ -112,7 +112,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
         return actividadSeleccionada;
     }
     
-    private Actividad obtainSelectedProfessionalActivity(){
+    public Actividad obtainSelectedProfessionalActivity(){
         Actividad actividadSeleccionada = null;
         if(profesionalSeleccionado != null){
             String nombreActividadSeleccionada = ListActividadesProf.getSelectedValue();
@@ -340,6 +340,15 @@ public class InterfazAdmin extends javax.swing.JFrame {
             profesionalSeleccionado.agregarActividad(new Actividad(nombre, descripcion, area));
             showProfessionalActivities();
             showProjectActivities();
+        }
+    }
+    
+    public void editarActividad(String nombre, String descripcion, String area){
+        if(profesionalSeleccionado != null){
+            Actividad nuevaActividad = new Actividad(nombre, descripcion, area);      
+            profesionalSeleccionado.modificarActividad(obtainSelectedProfessionalActivity(), nuevaActividad);
+            this.showProfessionalActivities();
+            this.showProjectActivities();
         }
     }
     /**
@@ -874,6 +883,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuActividades.add(MenuBttnAgregarActividad);
 
         MenuBttnEditarActividad.setText("Editar");
+        MenuBttnEditarActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnEditarActividadActionPerformed(evt);
+            }
+        });
         MenuActividades.add(MenuBttnEditarActividad);
 
         MenuBttnEliminarActividad.setText("Eliminar");
@@ -1055,6 +1069,24 @@ public class InterfazAdmin extends javax.swing.JFrame {
             aa.setVisible(true);
         }
     }//GEN-LAST:event_MenuBttnAgregarActividadActionPerformed
+
+    private void MenuBttnEditarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnEditarActividadActionPerformed
+        // TODO add your handling code here:
+        if(profesionalSeleccionado == null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un profesional del proyecto para poder editar una actividad", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        if(obtainSelectedProfessionalActivity()== null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar una actividad de un profesional para poder editarla", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        else{
+            EditarActividad ea = new EditarActividad(this);
+            ea.setVisible(true);
+        }
+    }//GEN-LAST:event_MenuBttnEditarActividadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;

@@ -122,6 +122,16 @@ public class Profesional extends Usuario{
     public void agregarActividad(Actividad actividad){
         actividades.add(actividad);
     }
+    
+    public void modificarActividad(Actividad viejaActividad, Actividad nuevaActividad){
+        boolean encontradaActividad = false;
+        for(int i = 0; i < actividades.size() && !encontradaActividad; i++){
+            if(actividades.get(i).equals(viejaActividad)){  
+                actividades.set(i, nuevaActividad);
+                encontradaActividad = true;
+            }
+        }
+    }
     /**
      * Modifica la lista de actividades del profesional con una nueva lista
      *
