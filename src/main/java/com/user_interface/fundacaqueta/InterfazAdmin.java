@@ -16,6 +16,7 @@ import com.logic.fundacaqueta.Proyecto;
 import com.logic.fundacaqueta.Profesional;
 import com.logic.fundacaqueta.Actividad;
 import com.logic.fundacaqueta.ContratoColaboracion;
+import com.logic.fundacaqueta.ContratoLaboral;
 
 //Interface imports
 import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
@@ -126,7 +127,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
         return actividadSeleccionada;
     }
     
-    private ContratoColaboracion obtainSelectedContrato(){
+    public ContratoColaboracion obtainSelectedContrato(){
         ContratoColaboracion contractoSeleccionado = null;
         
         String objetivoContrato = ListContratosProy.getSelectedValue();
@@ -360,9 +361,15 @@ public class InterfazAdmin extends javax.swing.JFrame {
         showProjectActivities();
     }
     
-    public void agregarContratoAProyecto(String objetivo, String tipo, int valor){
+    public void agregarContratoAProyecto(String objetivo, String tipo, double valor){
         proyectoSeleccionado.agregarContrato(new ContratoColaboracion(objetivo, tipo, valor));
         showProjectContracts();
+    }
+    
+    public void editarContratoProfesional(String objetivo, String tipo, double valor, LocalDate fechaInicio, LocalDate fechaFin){
+        profesionalSeleccionado.modificarContrato(new ContratoLaboral(objetivo, tipo, valor));
+        profesionalSeleccionado.obtenerContrato().modificarFechaInicio(fechaInicio);
+        profesionalSeleccionado.obtenerContrato().modificarFechaFin(fechaFin);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -921,9 +928,19 @@ public class InterfazAdmin extends javax.swing.JFrame {
         menuContratoProfesional.setText("Profesional");
 
         MenuBttnVerContrato.setText("Ver contrato");
+        MenuBttnVerContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnVerContratoActionPerformed(evt);
+            }
+        });
         menuContratoProfesional.add(MenuBttnVerContrato);
 
         menuEditarContratoProfesional.setText("Editar");
+        menuEditarContratoProfesional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarContratoProfesionalActionPerformed(evt);
+            }
+        });
         menuContratoProfesional.add(menuEditarContratoProfesional);
 
         MenuContratos.add(menuContratoProfesional);
@@ -1155,6 +1172,34 @@ public class InterfazAdmin extends javax.swing.JFrame {
             ac.setVisible(true);
         }
     }//GEN-LAST:event_MenuBttnAgregarContratoActionPerformed
+
+    private void menuEditarContratoProfesionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarContratoProfesionalActionPerformed
+        // TODO add your handling code here:
+        if(profesionalSeleccionado == null){
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un profesional del proyecto para poder editar su contrato", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            EditarContratoLaboral ecl = new EditarContratoLaboral(this);
+            ecl.setVisible(true);
+        }
+    }//GEN-LAST:event_menuEditarContratoProfesionalActionPerformed
+
+    private void MenuBttnVerContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnVerContratoActionPerformed
+        // TODO add your handling code here:
+        if(profesionalSeleccionado == null){
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un profesional del proyecto para poder visualizar su contrato", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            VerContratoLaboral vcl = new VerContratoLaboral(this);
+            vcl.setVisible(true);
+        }
+    }//GEN-LAST:event_MenuBttnVerContratoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;

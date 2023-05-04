@@ -5,21 +5,40 @@
 package com.user_interface.fundacaqueta.Interfaces.Contrato;
 
 import com.user_interface.fundacaqueta.InterfazAdmin;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author nebel
  */
-public class AgregarContrato extends javax.swing.JFrame {
+public class EditarContratoLaboral extends javax.swing.JFrame {
 
     private InterfazAdmin parentAdmin;
     
     /**
      * Creates new form AgregarActividad
      */
-    public AgregarContrato(InterfazAdmin parentAdmin) {
+    public EditarContratoLaboral(InterfazAdmin parentAdmin) {
         initComponents();
         this.parentAdmin = parentAdmin;
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        mostrarDatosContrato();
+    }
+    
+    private void mostrarDatosContrato(){
+        String objetivo = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerObjetivo();
+        String tipo = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerTipo();
+        String valor = String.valueOf(parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerValor());
+        String fechaInicio = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerFechaInicio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String fechaFin = "";
+        if(parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerFechaFin() != null)
+            fechaFin = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerFechaFin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        
+        txtObjetivo.setText(objetivo);
+        txtTipo.setText(tipo);
+        txtValor.setText(valor);
+        txtFechaInicio.setText(fechaInicio);
+        txtFechaFin.setText(fechaFin);
     }
     
     private boolean sonDatosValidos(){
@@ -27,9 +46,10 @@ public class AgregarContrato extends javax.swing.JFrame {
         
         boolean esObjetivoValido = !txtObjetivo.getText().equals("");
         boolean esTipoValido = !txtTipo.getText().equals("");
-        boolean esValorValido = !(txtValor.getText().equals("")) && (Double.parseDouble(txtValor.getText()) > 0);
+        boolean esValorValido = !(txtValor.getText().equals("")) && (Integer.parseInt(txtValor.getText()) > 0);
+        boolean esFechaInicioValida = !(txtFechaInicio.equals(""));
         
-        sonDatosValidos = esObjetivoValido && esTipoValido && esValorValido;
+        sonDatosValidos = esObjetivoValido && esTipoValido && esValorValido && esFechaInicioValida;
         
         return sonDatosValidos;
     }
@@ -52,12 +72,16 @@ public class AgregarContrato extends javax.swing.JFrame {
         bttnConfirmar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtValor = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtFechaInicio = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtFechaFin = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Agregar Contrato");
+        jLabel1.setText("Editar Contrato");
 
         jLabel2.setText("Objetivo:");
 
@@ -81,27 +105,36 @@ public class AgregarContrato extends javax.swing.JFrame {
 
         jLabel5.setText("Valor:");
 
+        jLabel6.setText("Fecha inicio (dd/mm/yyyy):");
+
+        jLabel7.setText("Fecha fin (dd/mm/yyyy):");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtFechaInicio)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtObjetivo)
+                            .addComponent(txtObjetivo, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                             .addComponent(txtTipo)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
                                 .addComponent(bttnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bttnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(bttnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFechaFin))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtValor))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtValor, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,11 +154,19 @@ public class AgregarContrato extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bttnConfirmar)
                     .addComponent(bttnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -144,12 +185,31 @@ public class AgregarContrato extends javax.swing.JFrame {
                     "Campos invalidos",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         else{
-            parentAdmin.agregarContratoAProyecto(txtObjetivo.getText(),
+            String[] fecha = txtFechaInicio.getText().split("/");
+            int dias = Integer.parseInt(fecha[0]);;
+            int meses = Integer.parseInt(fecha[1]);;
+            int años = Integer.parseInt(fecha[2]);
+            LocalDate fechaInicio = LocalDate.of(años,meses,dias);
+            
+            LocalDate fechaFin = null;
+            if(!(txtFechaFin.getText().equals(""))){
+                String[] fechasFin = txtFechaFin.getText().split("/");
+                int diasFin = Integer.parseInt(fechasFin[0]);;
+                int mesesFin = Integer.parseInt(fechasFin[1]);;
+                int añosFin = Integer.parseInt(fechasFin[2]);
+                fechaFin = LocalDate.of(añosFin,mesesFin,diasFin);
+            }
+            
+            parentAdmin.editarContratoProfesional(txtObjetivo.getText(),
                     txtTipo.getText(),
-                    Double.parseDouble(txtValor.getText()));
+                    Double.parseDouble(txtValor.getText()),
+                    fechaInicio,
+                    fechaFin
+            );
+            
             this.dispose();
             javax.swing.JOptionPane.showMessageDialog(this,
-                    "Se agregó el contrato con exito",
+                    "Se modificó el contrato con exito",
                     "Operación realizada",
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
@@ -162,6 +222,10 @@ public class AgregarContrato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField txtFechaFin;
+    private javax.swing.JTextField txtFechaInicio;
     private javax.swing.JTextField txtObjetivo;
     private javax.swing.JTextField txtTipo;
     private javax.swing.JTextField txtValor;

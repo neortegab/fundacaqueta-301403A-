@@ -119,11 +119,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver contrato"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuBttnVerContratoActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="menuEditarContratoProfesional">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Editar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEditarContratoProfesionalActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
