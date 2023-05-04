@@ -4,17 +4,34 @@
  */
 package com.user_interface.fundacaqueta.Interfaces.Contrato;
 
+import com.user_interface.fundacaqueta.InterfazAdmin;
 /**
  *
  * @author nebel
  */
 public class AgregarContrato extends javax.swing.JFrame {
 
+    private InterfazAdmin parentAdmin;
+    
     /**
      * Creates new form AgregarActividad
      */
-    public AgregarContrato() {
+    public AgregarContrato(InterfazAdmin parentAdmin) {
         initComponents();
+        this.parentAdmin = parentAdmin;
+        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+    }
+    
+    private boolean sonDatosValidos(){
+        boolean sonDatosValidos = false;
+        
+        boolean esObjetivoValido = !txtObjetivo.getText().equals("");
+        boolean esTipoValido = !txtTipo.getText().equals("");
+        boolean esValorValido = !(txtValor.getText().equals("")) && (Integer.parseInt(txtValor.getText()) > 0);
+        
+        sonDatosValidos = esObjetivoValido && esTipoValido && esValorValido;
+        
+        return sonDatosValidos;
     }
 
     /**
@@ -28,29 +45,39 @@ public class AgregarContrato extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtObjetivo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtTipo = new javax.swing.JTextField();
+        bttnCancelar = new javax.swing.JButton();
+        bttnConfirmar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Agregar Actividad");
+        jLabel1.setText("Agregar Contrato");
 
         jLabel2.setText("Objetivo:");
 
         jLabel3.setText("Tipo:");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jButton1.setText("Cancelar");
+        bttnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        bttnCancelar.setText("Cancelar");
+        bttnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnCancelarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jButton2.setText("Confirmar");
+        bttnConfirmar.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        bttnConfirmar.setText("Confirmar");
+        bttnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnConfirmarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Valor:");
 
@@ -66,15 +93,15 @@ public class AgregarContrato extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
+                            .addComponent(txtObjetivo)
+                            .addComponent(txtTipo)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bttnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(bttnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField4))
+                    .addComponent(txtValor))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -85,34 +112,58 @@ public class AgregarContrato extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(bttnConfirmar)
+                    .addComponent(bttnCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bttnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_bttnCancelarActionPerformed
+
+    private void bttnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnConfirmarActionPerformed
+        // TODO add your handling code here:
+        if(!sonDatosValidos())
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No puede existir ningun campo vacio y el valor debe ser positivo",
+                    "Campos invalidos",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        else{
+            parentAdmin.agregarContratoAProyecto(txtObjetivo.getText(),
+                    txtTipo.getText(),
+                    Integer.parseInt(txtValor.getText()));
+            this.dispose();
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Se agregó el contrato con exito",
+                    "Operación realizada",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_bttnConfirmarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton bttnCancelar;
+    private javax.swing.JButton bttnConfirmar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtObjetivo;
+    private javax.swing.JTextField txtTipo;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,7 @@ import com.logic.fundacaqueta.ContratoColaboracion;
 import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
 import com.user_interface.fundacaqueta.Interfaces.Profesional.*;
 import com.user_interface.fundacaqueta.Interfaces.Actividad.*;
+import com.user_interface.fundacaqueta.Interfaces.Contrato.*;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 /**
@@ -56,6 +57,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
             nombresProyectos.addElement(proyecto.obtenerNombre());
         }
         ListProyectos.setModel(nombresProyectos);
+        ListProyectos.setSelectedValue(proyectos.get(0).obtenerNombre(),true);
         proyectoSeleccionado = proyectos.get(0);
     }
     
@@ -356,6 +358,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         profesionalSeleccionado.removerActividad(obtainSelectedProfessionalActivity());
         showProfessionalActivities();
         showProjectActivities();
+    }
+    
+    public void agregarContratoAProyecto(String objetivo, String tipo, int valor){
+        proyectoSeleccionado.agregarContrato(new ContratoColaboracion(objetivo, tipo, valor));
+        showProjectContracts();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -924,6 +931,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         menuContratoProyecto.setText("Proyecto");
 
         MenuBttnAgregarContrato.setText("Agregar");
+        MenuBttnAgregarContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnAgregarContratoActionPerformed(evt);
+            }
+        });
         menuContratoProyecto.add(MenuBttnAgregarContrato);
 
         menuEditarContratoProyecto.setText("Editar");
@@ -1130,6 +1142,19 @@ public class InterfazAdmin extends javax.swing.JFrame {
             ea.setVisible(true);
         }
     }//GEN-LAST:event_MenuBttnEliminarActividadActionPerformed
+
+    private void MenuBttnAgregarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAgregarContratoActionPerformed
+        // TODO add your handling code here:
+        if(proyectoSeleccionado == null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un proyecto para poder agregar un contrato", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        else{
+            AgregarContrato ac = new AgregarContrato(this);
+            ac.setVisible(true);
+        }
+    }//GEN-LAST:event_MenuBttnAgregarContratoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
