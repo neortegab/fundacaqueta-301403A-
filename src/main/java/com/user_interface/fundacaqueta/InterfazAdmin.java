@@ -84,12 +84,14 @@ public class InterfazAdmin extends javax.swing.JFrame {
         }
     }
     
-    private Proyecto obtainSelectedProject(){
-        String nombreProyectoSeleccionado = ListProyectos.getSelectedValue();
-        if(nombreProyectoSeleccionado != null){
-            for(Proyecto proyecto : fundacaqueta.obtenerProyectos()){
-                if(proyecto.obtenerNombre().equals(nombreProyectoSeleccionado))
-                    return proyectoSeleccionado = proyecto;
+    public Proyecto obtainSelectedProject(){
+        if(proyectoSeleccionado == null){
+            String nombreProyectoSeleccionado = ListProyectos.getSelectedValue();
+            if(nombreProyectoSeleccionado != null){
+                for(Proyecto proyecto : fundacaqueta.obtenerProyectos()){
+                    if(proyecto.obtenerNombre().equals(nombreProyectoSeleccionado))
+                        return proyectoSeleccionado = proyecto;
+                }
             }
         }
         return proyectoSeleccionado;
@@ -132,14 +134,16 @@ public class InterfazAdmin extends javax.swing.JFrame {
     public ContratoColaboracion obtainSelectedContrato(){
         ContratoColaboracion contratoBuscado = null;
         
-        String objetivoContrato = ListContratosProy.getSelectedValue();
-        for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
-            if(contrato.obtenerObjetivo().equals(objetivoContrato))
-                contratoBuscado = contrato;
-        }
-        
-        contratoSeleccionado = contratoBuscado;
-        
+        if(contratoSeleccionado == null){
+            String objetivoContrato = ListContratosProy.getSelectedValue();
+            for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
+                if(contrato.obtenerObjetivo().equals(objetivoContrato)){
+                    contratoBuscado = contrato;
+                    break;
+                }
+            }
+            contratoSeleccionado = contratoBuscado;
+        }        
         return contratoSeleccionado;
     }
     
@@ -384,6 +388,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
         proyectoSeleccionado.modificarContrato(obtainSelectedContrato(), nuevoContrato);
         contratoSeleccionado = nuevoContrato;
         showDetailsContract();
+    }
+    
+    public void eliminarContrato(){
+        int indexContrato = ListContratosProy.getSelectedIndex();
+        proyectoSeleccionado.eliminarContrato(indexContrato);
+        showProjectContracts();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -978,6 +988,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         menuContratoProyecto.add(menuEditarContratoProyecto);
 
         EliminarContrato.setText("Eliminar");
+        EliminarContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarContratoActionPerformed(evt);
+            }
+        });
         menuContratoProyecto.add(EliminarContrato);
 
         MenuContratos.add(menuContratoProyecto);
@@ -1238,6 +1253,25 @@ public class InterfazAdmin extends javax.swing.JFrame {
             ecc.setVisible(true);
         }
     }//GEN-LAST:event_menuEditarContratoProyectoActionPerformed
+
+    private void EliminarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarContratoActionPerformed
+        // TODO add your handling code here:
+        if(proyectoSeleccionado == null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un proyecto para poder eliminar uno de sus contratos", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+    
+        if(obtainSelectedContrato() == null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un contrato del proyecto para poder eliminarlo", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        else{
+            EliminarContrato ec = new EliminarContrato(this);
+            ec.setVisible(true);
+        }
+    }//GEN-LAST:event_EliminarContratoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
