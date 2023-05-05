@@ -11,14 +11,14 @@ import java.time.format.DateTimeFormatter;
  *
  * @author nebel
  */
-public class EditarContratoLaboral extends javax.swing.JFrame {
+public class EditarContratoColaboracion extends javax.swing.JFrame {
 
     private InterfazAdmin parentAdmin;
     
     /**
      * Creates new form AgregarActividad
      */
-    public EditarContratoLaboral(InterfazAdmin parentAdmin) {
+    public EditarContratoColaboracion(InterfazAdmin parentAdmin) {
         initComponents();
         this.parentAdmin = parentAdmin;
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
@@ -26,13 +26,13 @@ public class EditarContratoLaboral extends javax.swing.JFrame {
     }
     
     private void mostrarDatosContrato(){
-        String objetivo = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerObjetivo();
-        String tipo = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerTipo();
-        String valor = String.valueOf(parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerValor());
-        String fechaInicio = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerFechaInicio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String objetivo = parentAdmin.obtainSelectedContrato().obtenerObjetivo();
+        String tipo = parentAdmin.obtainSelectedContrato().obtenerTipo();
+        String valor = String.valueOf(parentAdmin.obtainSelectedContrato().obtenerValor());
+        String fechaInicio = parentAdmin.obtainSelectedContrato().obtenerFechaInicio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String fechaFin = "";
-        if(parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerFechaFin() != null)
-            fechaFin = parentAdmin.obtenerProfesionalSeleccionado().obtenerContrato().obtenerFechaFin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if(parentAdmin.obtainSelectedContrato().obtenerFechaFin() != null)
+            fechaFin = parentAdmin.obtainSelectedContrato().obtenerFechaFin().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         
         txtObjetivo.setText(objetivo);
         txtTipo.setText(tipo);
@@ -200,7 +200,7 @@ public class EditarContratoLaboral extends javax.swing.JFrame {
                 fechaFin = LocalDate.of(añosFin,mesesFin,diasFin);
             }
             
-            parentAdmin.editarContratoProfesional(txtObjetivo.getText(),
+            parentAdmin.editarContratoColaboracion(txtObjetivo.getText(),
                     txtTipo.getText(),
                     Double.parseDouble(txtValor.getText()),
                     fechaInicio,

@@ -37,6 +37,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
     
     private Profesional profesionalSeleccionado;
     
+    private ContratoColaboracion contratoSeleccionado;
+    
     public final static int ELIMINAR_PROFESIONAL = 1;
     /**
      * Creates new form InterfazAdmin
@@ -128,15 +130,17 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     public ContratoColaboracion obtainSelectedContrato(){
-        ContratoColaboracion contractoSeleccionado = null;
+        ContratoColaboracion contratoBuscado = null;
         
         String objetivoContrato = ListContratosProy.getSelectedValue();
         for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
             if(contrato.obtenerObjetivo().equals(objetivoContrato))
-                contractoSeleccionado = contrato;
+                contratoBuscado = contrato;
         }
         
-        return contractoSeleccionado;
+        contratoSeleccionado = contratoBuscado;
+        
+        return contratoSeleccionado;
     }
     
     private void showProfessionalActivities(){
@@ -234,7 +238,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showDetailsContract(){
-        ContratoColaboracion contratoSeleccionado = obtainSelectedContrato();
+        if(contratoSeleccionado == null)
+                contratoSeleccionado = obtainSelectedContrato();
         TxtTipoContrato.setText(contratoSeleccionado.obtenerTipo());
         TxtValorContrato.setText(Double.toString(contratoSeleccionado.obtenerValor()));
         TxtFechaInicioContrato.setText(contratoSeleccionado.obtenerFechaInicio().toString());
@@ -370,6 +375,15 @@ public class InterfazAdmin extends javax.swing.JFrame {
         profesionalSeleccionado.modificarContrato(new ContratoLaboral(objetivo, tipo, valor));
         profesionalSeleccionado.obtenerContrato().modificarFechaInicio(fechaInicio);
         profesionalSeleccionado.obtenerContrato().modificarFechaFin(fechaFin);
+    }
+    
+    public void editarContratoColaboracion(String objetivo, String tipo, double valor, LocalDate fechaInicio, LocalDate fechaFin){
+        ContratoColaboracion nuevoContrato = new ContratoColaboracion(objetivo, tipo, valor);
+        nuevoContrato.modificarFechaInicio(fechaInicio);
+        nuevoContrato.modificarFechaFin(fechaFin);
+        proyectoSeleccionado.modificarContrato(obtainSelectedContrato(), nuevoContrato);
+        contratoSeleccionado = nuevoContrato;
+        showDetailsContract();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -523,8 +537,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SPaneProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SPaneProyectos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(TxtLugarEjecucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -600,7 +614,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
                     .addGroup(PanelActividadesProfesionalLayout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addComponent(SPaneActividadesProf)
+                    .addComponent(SPaneActividadesProf, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                     .addGroup(PanelActividadesProfesionalLayout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -956,6 +970,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         menuContratoProyecto.add(MenuBttnAgregarContrato);
 
         menuEditarContratoProyecto.setText("Editar");
+        menuEditarContratoProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarContratoProyectoActionPerformed(evt);
+            }
+        });
         menuContratoProyecto.add(menuEditarContratoProyecto);
 
         EliminarContrato.setText("Eliminar");
@@ -1200,6 +1219,25 @@ public class InterfazAdmin extends javax.swing.JFrame {
             vcl.setVisible(true);
         }
     }//GEN-LAST:event_MenuBttnVerContratoActionPerformed
+
+    private void menuEditarContratoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarContratoProyectoActionPerformed
+        // TODO add your handling code here:
+        if(proyectoSeleccionado == null){
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un proyecto para poder modificar uno de sus contratos", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        if(obtainSelectedContrato() == null)
+            JOptionPane.showMessageDialog(this, 
+                    "Debe seleccionar un contrato del proyecto para poder modificarlo", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        else{
+            EditarContratoColaboracion ecc = new EditarContratoColaboracion(this);
+            ecc.setVisible(true);
+        }
+    }//GEN-LAST:event_menuEditarContratoProyectoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;

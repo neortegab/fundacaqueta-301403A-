@@ -167,6 +167,10 @@ public class Proyecto {
         this.lugarEjecucion = lugarEjecucion;
     }
     
+    /**
+     * Calcula el valor total de un proyecto sumando los valores de los contratos de sus profesionales mas los contratos que tiene con otras empresas.
+     * @return valor total calculado
+     */
     public double obtenerValor(){
         for(Profesional profesional : profesionales){
             valor+=profesional.obtenerContrato().obtenerValor();
@@ -184,6 +188,21 @@ public class Proyecto {
      */
     public ArrayList<ContratoColaboracion> obtenerContratos() {
         return contratos;
+    }
+    
+    /**
+     * Metodo que modifica un contrato de la lista por uno nuevo
+     * @param antiguoContrato
+     * @param nuevoContrato 
+     */
+    public void modificarContrato(ContratoColaboracion antiguoContrato, ContratoColaboracion nuevoContrato){
+        boolean contratoEncontrado = false;
+        for(int i = 0; i < contratos.size() && !contratoEncontrado; i++){
+            if(contratos.get(i).equals(antiguoContrato)){  
+                contratos.set(i, nuevoContrato);
+                contratoEncontrado = true;
+            }
+        }
     }
     
     /**
