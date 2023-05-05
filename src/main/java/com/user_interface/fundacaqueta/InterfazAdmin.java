@@ -46,6 +46,8 @@ public class InterfazAdmin extends javax.swing.JFrame {
     public InterfazAdmin(Fundacaqueta fundacaqueta) {
         initComponents();
         this.fundacaqueta = fundacaqueta;
+        this.profesionalSeleccionado = null;
+        this.contratoSeleccionado = null;
         showProjects();
     }
     
@@ -132,18 +134,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     public ContratoColaboracion obtainSelectedContrato(){
-        ContratoColaboracion contratoBuscado = null;
-        
-        if(contratoSeleccionado == null){
-            String objetivoContrato = ListContratosProy.getSelectedValue();
-            for(ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()){
-                if(contrato.obtenerObjetivo().equals(objetivoContrato)){
-                    contratoBuscado = contrato;
-                    break;
-                }
+        String objetivoContrato = ListContratosProy.getSelectedValue();
+        for (ContratoColaboracion contrato : proyectoSeleccionado.obtenerContratos()) {
+            if (contrato.obtenerObjetivo().equals(objetivoContrato)) {
+                return contratoSeleccionado = contrato;
             }
-            contratoSeleccionado = contratoBuscado;
-        }        
+        }
         return contratoSeleccionado;
     }
     
@@ -242,8 +238,7 @@ public class InterfazAdmin extends javax.swing.JFrame {
     }
     
     private void showDetailsContract(){
-        if(contratoSeleccionado == null)
-                contratoSeleccionado = obtainSelectedContrato();
+        contratoSeleccionado = obtainSelectedContrato();
         TxtTipoContrato.setText(contratoSeleccionado.obtenerTipo());
         TxtValorContrato.setText(Double.toString(contratoSeleccionado.obtenerValor()));
         TxtFechaInicioContrato.setText(contratoSeleccionado.obtenerFechaInicio().toString());
