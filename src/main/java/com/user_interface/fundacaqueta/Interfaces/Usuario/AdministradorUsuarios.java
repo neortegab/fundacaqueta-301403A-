@@ -10,6 +10,7 @@ import com.logic.fundacaqueta.Administrador;
 import com.logic.fundacaqueta.Auxiliar;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author nebel
@@ -25,6 +26,7 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         this.admin = admin;
         mostrarAdministradores();
         mostrarAuxiliares();
+        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
     }
     
     private String[] devolverInformacionAdministradorSeleccionado(){
@@ -133,7 +135,7 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         bttnEditarAux = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -250,8 +252,13 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        jMenu2.setText("Salir");
-        jMenuBar1.add(jMenu2);
+        menuSalir.setText("Salir");
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -343,6 +350,11 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bttnEditarAuxActionPerformed
 
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_menuSalirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnAgregarAdmin;
     private javax.swing.JButton bttnAgregarAux;
@@ -352,7 +364,6 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
     private javax.swing.JButton bttnEliminarAux;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -360,5 +371,6 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> listAdmins;
     private javax.swing.JList<String> listAuxs;
+    private javax.swing.JMenu menuSalir;
     // End of variables declaration//GEN-END:variables
 }
