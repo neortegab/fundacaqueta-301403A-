@@ -110,6 +110,20 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
                 );
         mostrarAuxiliares();
     }
+    
+    public void eliminarUsuarioAdministrador(){
+        int index = listAdmins.getSelectedIndex();
+        listAdmins.setModel(new DefaultListModel());
+        admin.eliminarAdministrador(index);
+        mostrarAdministradores();
+    }
+    
+    public void eliminarUsuarioAuxiliar(){
+        int index = listAuxs.getSelectedIndex();
+        listAuxs.setModel(new DefaultListModel());
+        admin.eliminarAuxiliares(index);
+        mostrarAuxiliares();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,6 +174,11 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         });
 
         bttnEliminarAdmin.setText("Eliminar");
+        bttnEliminarAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnEliminarAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -206,6 +225,11 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         });
 
         bttnEliminarAux.setText("Eliminar");
+        bttnEliminarAux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnEliminarAuxActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(listAuxs);
 
@@ -354,6 +378,54 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
+
+    private void bttnEliminarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEliminarAdminActionPerformed
+        // TODO add your handling code here:
+        String[] datosAdmin = devolverInformacionAdministradorSeleccionado();
+        if(listAdmins.getSelectedIndex() < 0)
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Debe seleccionar un usuario administrador para poder eliminarlo",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        else{
+            EliminarUsuario eu = new EliminarUsuario(
+                    this,
+                    datosAdmin[0],
+                    datosAdmin[1],
+                    datosAdmin[2],
+                    datosAdmin[3],
+                    datosAdmin[4],
+                    Usuario.ADMINISTRADOR
+            );
+            eu.setVisible(true);
+        }
+    }//GEN-LAST:event_bttnEliminarAdminActionPerformed
+
+    private void bttnEliminarAuxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEliminarAuxActionPerformed
+        // TODO add your handling code here:
+        String[] datosAux = devolverInformacionAuxiliarSeleccionado();
+        if(listAuxs.getSelectedIndex() < 0)
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Debe seleccionar un usuario auxiliar para poder eliminarlo",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        else{
+            EliminarUsuario eu = new EliminarUsuario(
+                    this,
+                    datosAux[0],
+                    datosAux[1],
+                    datosAux[2],
+                    datosAux[3],
+                    datosAux[4],
+                    Usuario.AUXILIAR
+            );
+            eu.setVisible(true);
+        }
+    }//GEN-LAST:event_bttnEliminarAuxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnAgregarAdmin;
