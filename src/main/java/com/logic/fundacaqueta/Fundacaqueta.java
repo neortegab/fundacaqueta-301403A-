@@ -61,6 +61,22 @@ public class Fundacaqueta {
     public void agregarAdministrador(Administrador admin) {
         administradores.add(admin);
     }
+    
+    /**
+     * Metodo que modifica un administrador de la lista de administradores
+     * @param adminAntiguo - administrador con la informacion antigua
+     * @param nuevoAdmin  - administrador con la nueva informacion
+     */
+    public void modificarAdministrador(Administrador adminAntiguo, Administrador nuevoAdmin){
+        if(!administradores.isEmpty()){
+            for(int i = 0; i < administradores.size(); i++){
+                if(administradores.get(i).equals(adminAntiguo)){
+                    administradores.set(i, nuevoAdmin);
+                    break;
+                }
+            }
+        }
+    }
 
     /**
      * Elimina un administrador de la lista de administradores
@@ -96,6 +112,22 @@ public class Fundacaqueta {
      */
     public void agregarAuxiliares(Auxiliar aux) {
         auxiliares.add(aux);
+    }
+    
+    /**
+     * Metodo que modifica un auxiliar de la lista de auxiliares
+     * @param auxAntiguo - auxiliar con la informacion antigua
+     * @param nuevoAux  - auxiliar con la nueva informacion
+     */
+    public void modificarAuxiliar(Auxiliar auxAntiguo, Auxiliar nuevoAux){
+        if(!auxiliares.isEmpty()){
+            for(int i = 0; i < auxiliares.size(); i++){
+                if(auxiliares.get(i).equals(auxAntiguo)){
+                    auxiliares.set(i, nuevoAux);
+                    break;
+                }
+            }
+        }
     }
 
     /**

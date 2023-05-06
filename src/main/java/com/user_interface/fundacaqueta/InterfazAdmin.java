@@ -23,6 +23,7 @@ import com.user_interface.fundacaqueta.Interfaces.Proyecto.*;
 import com.user_interface.fundacaqueta.Interfaces.Profesional.*;
 import com.user_interface.fundacaqueta.Interfaces.Actividad.*;
 import com.user_interface.fundacaqueta.Interfaces.Contrato.*;
+import com.user_interface.fundacaqueta.Interfaces.Usuario.AdministradorUsuarios;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 /**
@@ -997,6 +998,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
         MenuUsuarios.setText("Usuarios");
 
         MenuBttnAdminUsuarios.setText("Administrar");
+        MenuBttnAdminUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBttnAdminUsuariosActionPerformed(evt);
+            }
+        });
         MenuUsuarios.add(MenuBttnAdminUsuarios);
 
         BarOptions.add(MenuUsuarios);
@@ -1267,6 +1273,12 @@ public class InterfazAdmin extends javax.swing.JFrame {
             ec.setVisible(true);
         }
     }//GEN-LAST:event_EliminarContratoActionPerformed
+
+    private void MenuBttnAdminUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBttnAdminUsuariosActionPerformed
+        // TODO add your handling code here:
+        AdministradorUsuarios au = new AdministradorUsuarios(this.fundacaqueta);
+        au.setVisible(true);
+    }//GEN-LAST:event_MenuBttnAdminUsuariosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarOptions;
