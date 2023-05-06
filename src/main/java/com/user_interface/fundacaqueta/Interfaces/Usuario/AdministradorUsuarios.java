@@ -9,6 +9,7 @@ import com.logic.fundacaqueta.Fundacaqueta;
 import com.logic.fundacaqueta.Administrador;
 import com.logic.fundacaqueta.Auxiliar;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author nebel
@@ -24,6 +25,42 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         this.admin = admin;
         mostrarAdministradores();
         mostrarAuxiliares();
+    }
+    
+    private String[] devolverInformacionAdministradorSeleccionado(){
+        String[] datosUsuario = new String[5];
+        
+        datosUsuario[0] = listAdmins.getSelectedValue();
+        
+        for(int i = 0; i < admin.obtenerAdministradores().size(); i++){
+            if(admin.obtenerAdministradores().get(i).obtenerNombreUsuario().equals(datosUsuario[0])){
+                datosUsuario[1] = admin.obtenerAdministradores().get(i).obtenerContraseña();
+                datosUsuario[2] = admin.obtenerAdministradores().get(i).obtenerNombre();
+                datosUsuario[3] = admin.obtenerAdministradores().get(i).obtenerCorreo();
+                datosUsuario[4] = String.valueOf(admin.obtenerAdministradores().get(i).obtenerDocumento());
+                break;
+            }
+        }
+        
+        return datosUsuario;
+    }
+    
+    private String[] devolverInformacionAuxiliarSeleccionado(){
+        String[] datosUsuario = new String[5];
+        
+        datosUsuario[0] = listAuxs.getSelectedValue();
+        
+        for(int i = 0; i < admin.obtenerAuxiliares().size(); i++){
+            if(admin.obtenerAuxiliares().get(i).obtenerNombreUsuario().equals(datosUsuario[0])){
+                datosUsuario[1] = admin.obtenerAuxiliares().get(i).obtenerContraseña();
+                datosUsuario[2] = admin.obtenerAuxiliares().get(i).obtenerNombre();
+                datosUsuario[3] = admin.obtenerAuxiliares().get(i).obtenerCorreo();
+                datosUsuario[4] = String.valueOf(admin.obtenerAuxiliares().get(i).obtenerDocumento());
+                break;
+            }
+        }
+        
+        return datosUsuario;
     }
     
     private void mostrarAdministradores(){
@@ -49,6 +86,26 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
     
     public void agregarUsuarioAuxiliar(String nombreUsuario, String contraseña, String correo, String nombre, int documento){
         admin.agregarAuxiliares(new Auxiliar(nombreUsuario, contraseña, nombre, correo, documento));
+        mostrarAuxiliares();
+    }
+    
+    public void editarUsuarioAdministrador(String nombreUsuario, String contraseña, String nombre, String correo, int documento){
+        String[] datosActualesUsuario = devolverInformacionAdministradorSeleccionado();
+        listAdmins.setModel(new DefaultListModel());
+        admin.modificarAdministrador(
+                admin.obtenerAdministrador(datosActualesUsuario[0]),
+                new Administrador(nombreUsuario, contraseña, nombre, correo, documento)
+                );
+        mostrarAdministradores();
+    }
+    
+    public void editarUsuarioAuxiliar(String nombreUsuario, String contraseña, String nombre, String correo, int documento){
+        String[] datosActualesUsuario = devolverInformacionAuxiliarSeleccionado();
+        listAuxs.setModel(new DefaultListModel());
+        admin.modificarAuxiliar(
+                admin.obtenerAuxiliar(datosActualesUsuario[0]),
+                new Auxiliar(nombreUsuario, contraseña, nombre, correo, documento)
+                );
         mostrarAuxiliares();
     }
 
@@ -105,6 +162,11 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         });
 
         bttnEditarAdmin.setText("Editar");
+        bttnEditarAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnEditarAdminActionPerformed(evt);
+            }
+        });
 
         bttnEliminarAdmin.setText("Eliminar");
 
@@ -120,10 +182,10 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bttnEditarAdmin)
-                            .addComponent(bttnAgregarAdmin)
-                            .addComponent(bttnEliminarAdmin))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                            .addComponent(bttnEditarAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bttnAgregarAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bttnEliminarAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,9 +252,9 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addComponent(bttnEditarUsuario)
-                .addGap(44, 44, 44))
+                .addGap(55, 55, 55))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,6 +298,11 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         jLabel2.setText("Auxiliares:");
 
         bttnEditarAux.setText("Editar");
+        bttnEditarAux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnEditarAuxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -249,10 +316,10 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bttnAgregarAux)
-                            .addComponent(bttnEditarAux)
-                            .addComponent(bttnEliminarAux))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(bttnAgregarAux, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bttnEditarAux, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bttnEliminarAux, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,6 +384,58 @@ public class AdministradorUsuarios extends javax.swing.JFrame {
         AgregarUsuario au = new AgregarUsuario(this, Usuario.AUXILIAR);
         au.setVisible(true);
     }//GEN-LAST:event_bttnAgregarAuxActionPerformed
+
+    private void bttnEditarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEditarAdminActionPerformed
+        // TODO add your handling code here:
+        String[] datosAdmin = devolverInformacionAdministradorSeleccionado();
+        if(datosAdmin[0] == null){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Debe seleccionar un usuario administrador para poder editarlo",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+        }
+        else{
+            EditarUsuario eu = new EditarUsuario(
+                    this,
+                    datosAdmin[0],
+                    datosAdmin[1],
+                    datosAdmin[2],
+                    datosAdmin[3],
+                    datosAdmin[4],
+                    Usuario.ADMINISTRADOR
+            );
+            
+            eu.setVisible(true);
+        }
+    }//GEN-LAST:event_bttnEditarAdminActionPerformed
+
+    private void bttnEditarAuxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEditarAuxActionPerformed
+        // TODO add your handling code here:
+        String[] datosAux = devolverInformacionAuxiliarSeleccionado();
+        if(datosAux[0] == null){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Debe seleccionar un usuario auxiliar para poder editarlo",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+        }
+        else{
+            EditarUsuario eu = new EditarUsuario(
+                    this,
+                    datosAux[0],
+                    datosAux[1],
+                    datosAux[2],
+                    datosAux[3],
+                    datosAux[4],
+                    Usuario.AUXILIAR
+            );
+            
+            eu.setVisible(true);
+        }
+    }//GEN-LAST:event_bttnEditarAuxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnAgregarAdmin;

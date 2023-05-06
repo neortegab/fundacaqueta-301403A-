@@ -52,6 +52,24 @@ public class Fundacaqueta {
     public ArrayList<Administrador> obtenerAdministradores() {
         return administradores;
     }
+    
+    /**
+     * Obtiene un usuario administrador segun un nombre de usuario buscado
+     * @param nombreUsuario - nombre de usuario del usuario que desea buscarse
+     * @return administrador con el nombre de usuario indicado.
+     */
+    public Administrador obtenerAdministrador(String nombreUsuario){
+        Administrador adminBuscado = null;
+        
+        for(int i = 0; i < administradores.size(); i++){
+            if(administradores.get(i).obtenerNombreUsuario().equals(nombreUsuario)){
+                adminBuscado = administradores.get(i);
+                break;
+            }
+        }
+        
+        return adminBuscado;
+    }
 
     /**
      * Agrega un administrador a la lista de administradores
@@ -103,6 +121,24 @@ public class Fundacaqueta {
      */
     public ArrayList<Auxiliar> obtenerAuxiliares() {
         return auxiliares;
+    }
+    
+    /**
+     * Obtiene un usuario auxiliar segun un nombre de usuario buscado
+     * @param nombreUsuario - nombre de usuario del usuario que desea buscarse
+     * @return auxiliar con el nombre de usuario indicado.
+     */
+    public Auxiliar obtenerAuxiliar(String nombreUsuario){
+        Auxiliar auxBuscado = null;
+        
+        for(int i = 0; i < auxiliares.size(); i++){
+            if(auxiliares.get(i).obtenerNombreUsuario().equals(nombreUsuario)){
+                auxBuscado = auxiliares.get(i);
+                break;
+            }
+        }
+        
+        return auxBuscado;
     }
 
     /**
